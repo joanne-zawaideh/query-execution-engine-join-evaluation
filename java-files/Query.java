@@ -9,7 +9,7 @@ public class Query {
         this.query = query;
         selectCols = tables = joinCols = filter = null;
     }
-    public boolean ParseMe() throws Exception {
+    public void ParseMe() throws Exception {
         //store query
         query = query.replace("\n", " ").replace("\r", " ").trim();
         String upperQuery = query.toUpperCase().trim();

@@ -5,7 +5,7 @@ public class Main {
     public static void main(String[] args) {
         String query = "";
         try {
-            query = Files.readString(Paths.get("C:\\Users\\PC\\Documents\\DBMS\\DBMS-Project\\src\\input.txt"));
+            query = Files.readString(Paths.get("input-files\\input.txt"));
             System.out.println(query);
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -13,7 +13,7 @@ public class Main {
         //call parser to check syntax
         Query q1 = new Query(query);
         try {
-            boolean validSyntax = q1.ParseMe();
+            q1.ParseMe();
         } catch (Exception e){
             System.out.println("ERROR: " + e.getMessage());
         }
