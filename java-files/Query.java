@@ -7,13 +7,12 @@ public class Query
     //filter[0] = left, filter[1] = operator, filter[2] = right
     private String[] filter;
 
-
-
     Query(String query)
     {
         this.query = query;
         selectCols = tables = joinCols = filter = null;
     }
+
     public boolean ParseMe() throws Exception
     {
         //store query
@@ -197,7 +196,36 @@ public class Query
             }
         }
 
-
         return false;
+    }
+
+    public String toString()
+    {
+        String s="";
+        for(String col:selectCols)
+        {
+            s += col;
+            s+=" ";
+        }
+        s+="\n";
+        for(String table:tables)
+        {
+            s+=table;
+            s+=" ";
+        }
+        s+="\n";
+        for(String joinCol:joinCols)
+        {
+            s+=joinCol;
+            s+=" ";
+        }
+        s+="\n";
+        for(String f:filter)
+        {
+            s+=f;
+            s+=" ";
+        }
+
+        return s;
     }
 }
