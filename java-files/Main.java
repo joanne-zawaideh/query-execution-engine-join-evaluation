@@ -1,7 +1,9 @@
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
-public class Main {
+public class Main
+{
+
     public static void main(String[] args)
     {
         String query = "";
@@ -18,14 +20,15 @@ public class Main {
         Query q1 = new Query(query);
         try
         {
-            boolean validSyntax = q1.ParseMe();
+            q1.ParseMe();
         }
         catch (Exception e)
         {
             System.out.println("ERROR: " + e.getMessage());
         }
-        System.out.println(q1);
+
     }
 
 
 }
+

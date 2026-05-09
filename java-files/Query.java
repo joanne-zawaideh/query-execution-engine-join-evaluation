@@ -1,5 +1,4 @@
-public class Query
-{
+public class Query {
     private String query;
     private String[] selectCols;
     private String[] tables;
@@ -7,39 +6,48 @@ public class Query
     //filter[0] = left, filter[1] = operator, filter[2] = right
     private String[] filter;
 
+
     Query(String query)
     {
         this.query = query;
         selectCols = tables = joinCols = filter = null;
     }
 
-    public boolean ParseMe() throws Exception
+    public void ParseMe() throws Exception
     {
         //store query
         query = query.replace("\n", " ").replace("\r", " ").trim();
         String upperQuery = query.toUpperCase().trim();
+
         //check select and from
         int selectIndex = upperQuery.indexOf("SELECT");
         int fromIndex = upperQuery.indexOf("FROM");
         int whereIndex = upperQuery.indexOf("WHERE");
+
         if (selectIndex != 0)
         {
             throw new Exception("Query must start with SELECT");
         }
+
         if (fromIndex == -1 || fromIndex < selectIndex)
         {
             throw new Exception("FROM is missing or in wrong place");
         }
+
         if(whereIndex != -1 && whereIndex < fromIndex)
         {
             throw new Exception("WHERE is in wrong place");
         }
+
         if(!query.endsWith(";"))
         {
             throw new Exception("Missing semicolon");
         }
+
         //remove ;
         query = query.substring(0, query.length() - 1);
+
+
 
         //split the query into parts
         //check cols exist
@@ -53,7 +61,6 @@ public class Query
         {
             selectCols[i] = selectCols[i].trim();
         }
-
         //check tables exist
         if(whereIndex != -1)
         {
@@ -85,7 +92,6 @@ public class Query
         }
 
 
-
         //check if conditions exist
         String wherePart = "";
         if(whereIndex != -1)
@@ -114,12 +120,11 @@ public class Query
 
                     if (op.equals("="))
                     {
+                        // CHANGED eqIndex TO opIndex
+                        int opIndex = condition.indexOf("=");
 
-                        int eqIndex = condition.indexOf("=");
-
-                        String left = condition.substring(0, eqIndex).trim();
-                        String right = condition.substring(eqIndex + 1).trim();
-
+                        String left = condition.substring(0, opIndex).trim();
+                        String right = condition.substring(opIndex + 1).trim();
 
                         //join condition
                         if (left.contains(".") && right.contains("."))
@@ -128,7 +133,6 @@ public class Query
                             joinCols[0] = left;
                             joinCols[1] = right;
                         }
-
                         //filter condition
                         else
                         {
@@ -137,7 +141,6 @@ public class Query
                             filter[1] = "=";
                             filter[2] = right;
                         }
-
                     }
                     //no equality; it's a filter
                     else
@@ -148,8 +151,8 @@ public class Query
                         filter[2] = condition.substring(condition.indexOf(op) + op.length()).trim();
                     }
                 }
-            }
 
+            }
             else
             {
                 String op = null;
@@ -172,7 +175,6 @@ public class Query
                         }
                         //no filter condition
                         filter = null;
-
                     }
                     else
                     {
@@ -187,45 +189,15 @@ public class Query
                 else
                 {
                     filter=new String[3];
-                    filter[0]=wherePart.substring(0,wherePart.indexOf(op)).trim();
-                    filter[1]=op;
-                    filter[2]=wherePart.substring(wherePart.indexOf(op)+op.length()).trim();
+                    filter[0]= wherePart.substring(0,wherePart.indexOf(op)).trim();
+                    filter[1]= op;
+                    filter[2]= wherePart.substring(wherePart.indexOf(op)+op.length()).trim();
                     //no join condition
-                    joinCols=null;
+                    joinCols = null;
                 }
             }
         }
 
-        return false;
-    }
 
-    public String toString()
-    {
-        String s="";
-        for(String col:selectCols)
-        {
-            s += col;
-            s+=" ";
-        }
-        s+="\n";
-        for(String table:tables)
-        {
-            s+=table;
-            s+=" ";
-        }
-        s+="\n";
-        for(String joinCol:joinCols)
-        {
-            s+=joinCol;
-            s+=" ";
-        }
-        s+="\n";
-        for(String f:filter)
-        {
-            s+=f;
-            s+=" ";
-        }
-
-        return s;
     }
 }
