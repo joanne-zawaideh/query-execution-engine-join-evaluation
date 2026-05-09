@@ -4,19 +4,26 @@ a mini query execution engine that simulates how a database system processes que
 *Implementation Details*
 
 Query class:
+
 ParseMe() -> checks syntax and keywords, and assigns the data members of the Query object.
 
 ScanOperator class:
+
 ScanMe(String table) -> retrieves a table’s records, stores them in an ArrayList<Map<String, String>> and returns it.
   - LinkedHashMap: used to store the record’s fields and values and keep their order
-	  ex. In CSV file: 1, joanne, joanne@gmail.com
+    
+	ex. In CSV file: 1, joanne, joanne@gmail.com
+
     In map: { “id” -> 1, “name” -> “joanne”, “email” -> “joanne@gmail.com” }
   - BufferedReader: read files (usuallu big) by reading blocks into memory instead of reading one char at a time. 
   - FileReader: opens the file
 
+
 SelectOperator class:
+
 SelectMe(...) -> filters the records returned by ScanMe() 
   - Map.Entry<String, String>: each pair<String, String> in the map (field, value)
-    
+
+	
 Main class:
   - mapName.entrySet(): all pairs in the map { (field1, val1), (field2, val2), … }
