@@ -197,7 +197,31 @@ public class Query {
                 }
             }
         }
+    }
 
+    public String toString()
+    {
+        String s = "";
+        s += "Select Columns: ";
+        for(String c: selectCols)
+            s += c + ", ";
+        s += "\n";
 
+        s += "Tables: ";
+        for(String t: tables)
+            s += t + ", ";
+        s += "\n";
+
+        s += "Join Columns: ";
+        for(String j: joinCols)
+            s += j + ", ";
+        s += "\n";
+
+        s += "Filter Condition: ";
+        for(String f: filter)
+            s += f + " ";
+        s += "\n";
+
+        return s;
     }
 }
