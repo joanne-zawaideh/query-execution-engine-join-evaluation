@@ -1,4 +1,5 @@
-public class Query {
+public class Query
+{
     private String query;
     private String[] selectCols;
     private String[] tables;
@@ -12,6 +13,8 @@ public class Query {
         this.query = query;
         selectCols = tables = joinCols = filter = null;
     }
+
+    public String[] getFilter() { return filter; }
 
     public void ParseMe() throws Exception
     {

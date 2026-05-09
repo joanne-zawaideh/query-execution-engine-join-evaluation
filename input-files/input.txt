@@ -1,5 +1,5 @@
 SELECT Customers.customer_id, Orders.order_id
 FROM Customers, Orders
 WHERE Customers.customer_id = Orders.customer_id
-AND Orders.amount >= 100;
+AND Customers.membership_type = 'Gold';
 

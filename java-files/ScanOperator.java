@@ -15,12 +15,13 @@ public class ScanOperator
         tableName = tableName.toLowerCase().trim();
         try
         {
-            BufferedReader br = new BufferedReader(new FileReader("input-files\\" + tableName + ".csv"));
+            FileReader fr = new FileReader("input-files\\" + tableName + ".csv");
+            BufferedReader br = new BufferedReader(fr);
 
             String[] headers = br.readLine().split(",");
 
-            String line;
-            while ((line = br.readLine()) != null)
+            String line = br.readLine();
+            while (line != null)
             {
                 String[] values = line.split(",");
 
@@ -32,6 +33,7 @@ public class ScanOperator
                 }
 
                 table.add(row);
+                line = br.readLine();
             }
             br.close();
         }
