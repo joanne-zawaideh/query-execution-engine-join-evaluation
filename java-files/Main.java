@@ -29,7 +29,8 @@ public class Main
         {
             System.out.println("ERROR: " + e.getMessage());
         }
-        ArrayList<Map<String, String>> table = ScanOperator.ScanMe("customers");
+        System.out.println(q1);
+//        ArrayList<Map<String, String>> table = ScanOperator.ScanMe("customers");
 //        for (Map<String, String> row : table) {
 //
 //            for (Map.Entry<String, String> entry : row.entrySet()) {
@@ -38,15 +39,15 @@ public class Main
 //
 //            System.out.println();
 //        }
-        ArrayList<Map<String, String>> result = SelectOperator.SelectMe(table, q1.getFilter());
-        for(Map<String, String> record: result)
-        {
-            for (Map.Entry<String, String> pair: record.entrySet())
-            {
-                System.out.print(pair.getKey() + ": " + pair.getValue() + " | ");
-            }
-            System.out.println();
-        }
+//        ArrayList<Map<String, String>> result = SelectOperator.SelectMe(table, q1.getFilter());
+//        for(Map<String, String> record: result)
+//        {
+//            for (Map.Entry<String, String> pair: record.entrySet())
+//            {
+//                System.out.print(pair.getKey() + ": " + pair.getValue() + " | ");
+//            }
+//            System.out.println();
+//        }
 
 
     }

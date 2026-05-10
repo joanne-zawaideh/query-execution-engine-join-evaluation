@@ -3,7 +3,7 @@ import java.util.Map;
 
 public class SelectOperator
 {
-    public static ArrayList<Map<String, String>> SelectMe(ArrayList<Map<String, String>> table, String[] filter)
+    public static ArrayList<Map<String, String>> SelectMe(ArrayList<Map<String, String>> table, String[] filter) throws Exception
     {
         //filter[0] = col, filter[1] = op, filter[2] = value
         ArrayList<Map<String, String>> result = new ArrayList<>();
@@ -29,6 +29,10 @@ public class SelectOperator
         for(Map<String, String> record: table)
         {
             String val = record.get(col);
+            if(val == null)
+            {
+                throw new Exception("Column in where condition is invalid");
+            }
             boolean valid = false;
             if(isNumeric)
             {

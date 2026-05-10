@@ -3,7 +3,8 @@ public class Query
     private String query;
     private String[] selectCols;
     private String[] tables;
-    private String[] joinCols;
+    //join[0] = left, join[1] = operator, join[2] = right
+    private String[] join;
     //filter[0] = left, filter[1] = operator, filter[2] = right
     private String[] filter;
 
@@ -11,7 +12,7 @@ public class Query
     Query(String query)
     {
         this.query = query;
-        selectCols = tables = joinCols = filter = null;
+        selectCols = tables = join = filter = null;
     }
 
     public String[] getFilter() { return filter; }
@@ -121,37 +122,27 @@ public class Query
                     else if (condition.contains("=")) op = "=";
                     else throw new Exception("Invalid condition");
 
-                    if (op.equals("="))
+                    int opIndex = condition.indexOf(op);
+
+                    String left = condition.substring(0, opIndex).trim();
+                    String right = condition.substring(opIndex + 1).trim();
+
+                    //join condition
+                    if (left.contains(".") && right.contains("."))
                     {
-                        // CHANGED eqIndex TO opIndex
-                        int opIndex = condition.indexOf("=");
+                        join = new String[3];
+                        join[0] = left;
+                        join[1] = op;
+                        join[2] = right;
 
-                        String left = condition.substring(0, opIndex).trim();
-                        String right = condition.substring(opIndex + 1).trim();
-
-                        //join condition
-                        if (left.contains(".") && right.contains("."))
-                        {
-                            joinCols = new String[2];
-                            joinCols[0] = left;
-                            joinCols[1] = right;
-                        }
-                        //filter condition
-                        else
-                        {
-                            filter = new String[3];
-                            filter[0] = left;
-                            filter[1] = "=";
-                            filter[2] = right;
-                        }
                     }
-                    //no equality; it's a filter
+                    //filter condition
                     else
                     {
                         filter = new String[3];
-                        filter[0] = condition.substring(0, condition.indexOf(op)).trim();
+                        filter[0] = left;
                         filter[1] = op;
-                        filter[2] = condition.substring(condition.indexOf(op) + op.length()).trim();
+                        filter[2] = right;
                     }
                 }
 
@@ -159,7 +150,6 @@ public class Query
             else
             {
                 String op = null;
-
                 if (wherePart.contains(">=")) op = ">=";
                 else if (wherePart.contains("<=")) op = "<=";
                 else if (wherePart.contains(">")) op = ">";
@@ -167,36 +157,26 @@ public class Query
                 else if (wherePart.contains("=")) op = "=";
                 else throw new Exception("Invalid condition");
 
+                int opIndex = wherePart.indexOf(op);
+
                 // only one condition
-                if (op.equals("="))
+                if (wherePart.substring(0, opIndex).contains(".") && wherePart.substring(opIndex + 1).contains("."))
                 {
-                    if (wherePart.substring(0, wherePart.indexOf("=")).contains(".") && wherePart.substring(wherePart.indexOf("=") + 1).contains("."))
-                    {
-                        joinCols = wherePart.split("=");
-                        for (int i = 0; i < joinCols.length; i++) {
-                            joinCols[i] = joinCols[i].trim();
-                        }
-                        //no filter condition
-                        filter = null;
-                    }
-                    else
-                    {
-                        filter = new String[3];
-                        filter[0] = wherePart.substring(0, wherePart.indexOf("=")).trim();
-                        filter[1] = "=";
-                        filter[2] = wherePart.substring(wherePart.indexOf("=") + 1).trim();
-                        //no join condition
-                        joinCols = null;
-                    }
+                    join = new String[3];
+                    join[0] = wherePart.substring(0, opIndex).trim();
+                    join[1] = op;
+                    join[2] = wherePart.substring(opIndex + 1).trim();
+                    //no filter condition
+                    filter = null;
                 }
                 else
                 {
-                    filter=new String[3];
-                    filter[0]= wherePart.substring(0,wherePart.indexOf(op)).trim();
-                    filter[1]= op;
-                    filter[2]= wherePart.substring(wherePart.indexOf(op)+op.length()).trim();
+                    filter = new String[3];
+                    filter[0] = wherePart.substring(0, opIndex).trim();
+                    filter[1] = op;
+                    filter[2] = wherePart.substring(opIndex + 1).trim();
                     //no join condition
-                    joinCols = null;
+                    join = null;
                 }
             }
         }
@@ -215,9 +195,9 @@ public class Query
             s += t + ", ";
         s += "\n";
 
-        s += "Join Columns: ";
-        for(String j: joinCols)
-            s += j + ", ";
+        s += "Join Conditon: ";
+        for(String j: join)
+            s += j + " ";
         s += "\n";
 
         s += "Filter Condition: ";
