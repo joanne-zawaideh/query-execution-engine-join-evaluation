@@ -7,7 +7,7 @@ public class SelectOperator
     {
         //filter[0] = col, filter[1] = op, filter[2] = value
         ArrayList<Map<String, String>> result = new ArrayList<>();
-        String col = filter[0].split("\\.")[1];
+        String col = filter[0];
         String op = filter[1];
         String value = filter[2];
         boolean isNumeric;

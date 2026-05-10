@@ -29,7 +29,7 @@ public class ScanOperator
 
                 for(int i = 0; i< headers.length; i++)
                 {
-                    row.put(headers[i].trim(), values[i].trim()); // here you can add the table name: tableName+"." ...
+                    row.put(tableName + "." + headers[i].trim(), values[i].trim());
                 }
 
                 table.add(row);
