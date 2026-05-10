@@ -27,3 +27,8 @@ SelectMe(...) -> filters the records returned by ScanMe()
 	
 Main class:
   - mapName.entrySet(): all pairs in the map { (field1, val1), (field2, val2), … }
+
+JoinAlgorithm class:
+
+MeNestedLoop() ->
+	- map1.putAll(map2): copies the entries in map2 into map1
