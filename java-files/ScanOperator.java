@@ -12,7 +12,7 @@ public class ScanOperator
     {
         ArrayList<Map<String, String>> table = new ArrayList<>();
 
-        tableName = tableName.toLowerCase().trim();
+        tableName = tableName.trim();
         try
         {
             FileReader fr = new FileReader("input-files\\" + tableName + ".csv");

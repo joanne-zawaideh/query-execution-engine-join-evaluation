@@ -29,25 +29,25 @@ public class SelectOperator
         for(Map<String, String> record: table)
         {
             String val = record.get(col);
-            if(val == null)
+
+            if(val != null)
             {
-                throw new Exception("Column in where condition is invalid");
+                boolean valid = false;
+                if (isNumeric)
+                {
+                    double numericVal = Double.parseDouble(val);
+                    if (op.equals("=")) valid = (numericVal == numericValue);
+                    else if (op.equals("<")) valid = (numericVal < numericValue);
+                    else if (op.equals(">")) valid = (numericVal > numericValue);
+                    else if (op.equals("<=")) valid = (numericVal <= numericValue);
+                    else if (op.equals(">=")) valid = (numericVal >= numericValue);
+                }
+                else
+                {
+                    if (op.equals("=")) valid = (value.equals(val));
+                }
+                if (valid) result.add(record);
             }
-            boolean valid = false;
-            if(isNumeric)
-            {
-                double numericVal = Double.parseDouble(val);
-                if(op.equals("=")) valid = (numericVal == numericValue);
-                else if(op.equals("<")) valid = (numericVal < numericValue);
-                else if(op.equals(">")) valid = (numericVal > numericValue);
-                else if(op.equals("<=")) valid = (numericVal <= numericValue);
-                else if(op.equals(">=")) valid = (numericVal >= numericValue);
-            }
-            else
-            {
-                if(op.equals("=")) valid = (value.equals(val));
-            }
-            if(valid) result.add(record);
         }
 
         return result;

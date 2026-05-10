@@ -30,13 +30,17 @@ public class Main
             System.out.println("ERROR: " + e.getMessage());
         }
         System.out.println(q1);
-//        ArrayList<Map<String, String>> table = ScanOperator.ScanMe("customers");
-//        for (Map<String, String> row : table) {
-//
-//            for (Map.Entry<String, String> entry : row.entrySet()) {
-//                System.out.print(entry.getKey() + ": " + entry.getValue() + " | ");
-//            }
-//
+        ArrayList<Map<String, String>> table1 = ScanOperator.ScanMe("Customers");
+        ArrayList<Map<String, String>> table2 = ScanOperator.ScanMe("Orders");
+        ArrayList<Map<String, String>> table = JoinAlgorithm.MeNestedLoop(table1,table2, q1.getJoin());
+        for (Map<String, String> row : table) {
+
+            for (Map.Entry<String, String> entry : row.entrySet()) {
+                System.out.print(entry.getKey() + ": " + entry.getValue() + " | ");
+            }
+            System.out.println();
+        }
+
 //            System.out.println();
 //        }
 //        ArrayList<Map<String, String>> result = SelectOperator.SelectMe(table, q1.getFilter());
