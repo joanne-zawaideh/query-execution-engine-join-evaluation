@@ -1,7 +1,7 @@
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.HashMap;
 public class JoinAlgorithm
 {
     //assumptions: BFR = 100 record
@@ -85,4 +85,50 @@ public class JoinAlgorithm
         return result;
     }
 
+    public static ArrayList<Map<String, String>> MeHashJoin(ArrayList<Map<String, String>> customers, ArrayList<Map<String, String>> orders, String[] join)
+    {
+        String left = join[0];
+        String op = join[1];
+        String right = join[2];
+
+        ArrayList<Map<String, String>> result = new ArrayList<>();
+
+        ArrayList<Map<String, String>> smallerTable;
+        ArrayList<Map<String, String>> largerTable;
+
+        //we are assuming that left is the outer and right is the inner
+        if(customers.size() < orders.size())
+        {
+            smallerTable = customers;
+            largerTable = orders;
+
+            String leftTable = join[0].split("\\.")[0].trim().toLowerCase();
+            if(!leftTable.equals("Customers"))
+            {
+                left = join[2];
+                right = join[0];
+            }
+        }
+        else
+        {
+            smallerTable = orders;
+            largerTable = customers;
+
+            String leftTable = join[0].split("\\.")[0].trim().toLowerCase();
+            if(!leftTable.equals("Orders"))
+            {
+                left = join[2];
+                right = join[0];
+            }
+        }
+        //now left has smallerTable join column and right has largerTable
+
+        HashMap<String, ArrayList<Map<String, String>>> hashTable = new HashMap<>();
+        //first pass: iterate through smallerTable and fill hash table
+        for(Map<String, String> record: smallerTable)
+        {
+
+        }
+        return result;
+    }
 }
