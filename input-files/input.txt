@@ -1,5 +1,5 @@
 SELECT Customers.customer_id, Orders.order_id
 FROM Customers, Orders
-WHERE Customers.city = Orders.shipping_city
+WHERE Customers.customer_id = Orders.customer_id
 AND Customers.membership_type = 'Gold';
 

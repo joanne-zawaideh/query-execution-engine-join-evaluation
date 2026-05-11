@@ -32,7 +32,7 @@ public class Main
         System.out.println(q1);
         ArrayList<Map<String, String>> table1 = ScanOperator.ScanMe("Customers");
         ArrayList<Map<String, String>> table2 = ScanOperator.ScanMe("Orders");
-        ArrayList<Map<String, String>> table = JoinAlgorithm.MeNestedLoop(table1,table2, q1.getJoin());
+        ArrayList<Map<String, String>> table = JoinAlgorithm.MeHashJoin(table1,table2, q1.getJoin());
         for (Map<String, String> row : table) {
 
             for (Map.Entry<String, String> entry : row.entrySet()) {

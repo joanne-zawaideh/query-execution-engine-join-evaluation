@@ -123,12 +123,53 @@ public class JoinAlgorithm
         }
         //now left has smallerTable join column and right has largerTable
 
-        HashMap<String, ArrayList<Map<String, String>>> hashTable = new HashMap<>();
+        //map each record to a numbered bucket
+        HashMap<Integer, ArrayList<Map<String, String>>> hashTable = new HashMap<>();
+        int numberOfBuckets = 1000;
+
         //first pass: iterate through smallerTable and fill hash table
         for(Map<String, String> record: smallerTable)
         {
+            String value = record.get(left);
+            if(value != null)
+            {
+                //hashValue = bucket number
+                int hashValue = Math.abs(value.hashCode()) % numberOfBuckets;
 
+                if(!hashTable.containsKey(hashValue))
+                    hashTable.put(hashValue, new ArrayList<Map<String, String>>());
+
+                hashTable.get(hashValue).add(record);
+            }
         }
+
+        //second pass:  compare each record in largerTable to its hashed bucket
+        for(Map<String, String> record1: largerTable)
+        {
+            String value = record1.get(right);
+            if(value != null)
+            {
+                int hashValue = Math.abs(value.hashCode()) % numberOfBuckets;
+                if(hashTable.containsKey(hashValue))
+                {
+                    //compare with every record w/the same hashValue
+                    for(Map<String, String> record2: hashTable.get(hashValue))
+                    {
+                        String val1 = record1.get(right);
+                        String val2 = record2.get(left);
+
+                        if(val1.equals(val2))
+                        {
+                            Map<String,String> joinedRow = new LinkedHashMap<>();
+                            joinedRow.putAll(record1);
+                            joinedRow.putAll(record2);
+                            result.add(joinedRow);
+                        }
+                    }
+                }
+            }
+        }
+        System.out.println(result.size());
         return result;
     }
 }
