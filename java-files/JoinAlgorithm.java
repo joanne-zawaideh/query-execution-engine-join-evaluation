@@ -9,13 +9,14 @@ public class JoinAlgorithm
     //unspanned structure
     //fixed-sized record
 
-    public static ArrayList<Map<String, String>> MeNestedLoop(ArrayList<Map<String, String>> customers, ArrayList<Map<String, String>> orders, String[] join)
+    // customers and orders after applying SelectMe()
+    public static ArrayList<Map<String, String>> MeNestedLoop(ArrayList<Map<String, String>> customers, ArrayList<Map<String, String>> orders, String[] join) throws Exception
     {
         int numberOfBuffers=7;
         int BFR = 100;
 
+        //initial values before checking
         String left = join[0];
-        String op = join[1];
         String right = join[2];
 
         ArrayList<Map<String, String>> result = new ArrayList<>();
@@ -29,7 +30,7 @@ public class JoinAlgorithm
             outerTable = customers;
             innerTable = orders;
 
-            String leftTable = join[0].split("\\.")[0].trim().toLowerCase();
+            String leftTable = join[0].split("\\.")[0].trim();
             if(!leftTable.equals("Customers"))
             {
                 left = join[2];
@@ -41,7 +42,7 @@ public class JoinAlgorithm
             outerTable = orders;
             innerTable = customers;
 
-            String leftTable = join[0].split("\\.")[0].trim().toLowerCase();
+            String leftTable = join[0].split("\\.")[0].trim();
             if(!leftTable.equals("Orders"))
             {
                 left = join[2];
@@ -49,6 +50,14 @@ public class JoinAlgorithm
             }
         }
 
+        //check col validity
+        Map<String, String> temp1 = outerTable.get(0);
+        Map<String, String> temp2 = innerTable.get(0);
+        boolean validCols = true;
+        if(!temp1.containsKey(left)) validCols = false;
+        if(!temp2.containsKey(right)) validCols = false;
+        if(!validCols)
+            throw new Exception("ERROR: Join on Invalid Columns.");
 
         //outer loop accessing the smaller table nB-2 blocks at a time (every ((numberOfBuffers-2)*BFR) records)
         for(int i = 0; i < outerTable.size(); i += ((numberOfBuffers-2)*BFR))
@@ -85,10 +94,10 @@ public class JoinAlgorithm
         return result;
     }
 
-    public static ArrayList<Map<String, String>> MeHashJoin(ArrayList<Map<String, String>> customers, ArrayList<Map<String, String>> orders, String[] join)
+    public static ArrayList<Map<String, String>> MeHashJoin(ArrayList<Map<String, String>> customers, ArrayList<Map<String, String>> orders, String[] join) throws Exception
     {
+        //initial values before checking
         String left = join[0];
-        String op = join[1];
         String right = join[2];
 
         ArrayList<Map<String, String>> result = new ArrayList<>();
@@ -102,7 +111,7 @@ public class JoinAlgorithm
             smallerTable = customers;
             largerTable = orders;
 
-            String leftTable = join[0].split("\\.")[0].trim().toLowerCase();
+            String leftTable = join[0].split("\\.")[0].trim();
             if(!leftTable.equals("Customers"))
             {
                 left = join[2];
@@ -114,13 +123,24 @@ public class JoinAlgorithm
             smallerTable = orders;
             largerTable = customers;
 
-            String leftTable = join[0].split("\\.")[0].trim().toLowerCase();
+            String leftTable = join[0].split("\\.")[0].trim();
             if(!leftTable.equals("Orders"))
             {
                 left = join[2];
                 right = join[0];
             }
         }
+
+
+        //check col validity
+        Map<String, String> temp1 = smallerTable.get(0);
+        Map<String, String> temp2 = largerTable.get(0);
+        boolean validCols = true;
+        if(!temp1.containsKey(left)) validCols = false;
+        if(!temp2.containsKey(right)) validCols = false;
+        if(!validCols)
+            throw new Exception("ERROR: Join on Invalid Columns.");
+
         //now left has smallerTable join column and right has largerTable
 
         //map each record to a numbered bucket
@@ -169,7 +189,6 @@ public class JoinAlgorithm
                 }
             }
         }
-        System.out.println(result.size());
         return result;
     }
 }

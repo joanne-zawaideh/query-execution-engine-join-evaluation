@@ -10,6 +10,12 @@ public class SelectOperator
         String col = filter[0];
         String op = filter[1];
         String value = filter[2];
+
+        //check col validity
+        Map<String, String> temp = table.get(0);
+        if(!temp.containsKey(col))
+            throw new Exception("ERROR: Filter on Invalid Column");
+
         boolean isNumeric;
         double numericValue = 0;
 

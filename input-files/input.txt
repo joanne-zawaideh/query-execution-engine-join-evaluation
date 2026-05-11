@@ -1,5 +1,5 @@
 SELECT Customers.customer_id, Orders.order_id
 FROM Customers, Orders
-WHERE Customers.customer_id = Orders.customer_id
+WHERE Orders.customer_id = Customers.customer_id
 AND Customers.membership_type = 'Gold';
 
