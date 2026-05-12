@@ -10,7 +10,7 @@ public class JoinAlgorithm
     //fixed-sized record
 
     // customers and orders after applying SelectMe()
-    public static ArrayList<Map<String, String>> MeNestedLoop(ArrayList<Map<String, String>> customers, ArrayList<Map<String, String>> orders, String[] join) throws Exception
+    public static ArrayList<Map<String, String>> MeNestedLoop(ArrayList<Map<String, String>> table1, ArrayList<Map<String, String>> table2, String[] join) throws Exception
     {
         int numberOfBuffers=7;
         int BFR = 100;
@@ -25,10 +25,10 @@ public class JoinAlgorithm
         ArrayList<Map<String, String>> innerTable;
 
         //we are assuming that left is the outer and right is the inner
-        if(customers.size() < orders.size())
+        if(table1.size() < table2.size())
         {
-            outerTable = customers;
-            innerTable = orders;
+            outerTable = table1;
+            innerTable = table2;
 
             String leftTable = join[0].split("\\.")[0].trim();
             if(!leftTable.equals("Customers"))
@@ -39,8 +39,8 @@ public class JoinAlgorithm
         }
         else
         {
-            outerTable = orders;
-            innerTable = customers;
+            outerTable = table2;
+            innerTable = table1;
 
             String leftTable = join[0].split("\\.")[0].trim();
             if(!leftTable.equals("Orders"))
@@ -96,7 +96,7 @@ public class JoinAlgorithm
         return result;
     }
 
-    public static ArrayList<Map<String, String>> MeHashJoin(ArrayList<Map<String, String>> customers, ArrayList<Map<String, String>> orders, String[] join) throws Exception
+    public static ArrayList<Map<String, String>> MeHashJoin(ArrayList<Map<String, String>> table1, ArrayList<Map<String, String>> table2, String[] join) throws Exception
     {
         //initial values before checking
         String left = join[0];
@@ -108,10 +108,10 @@ public class JoinAlgorithm
         ArrayList<Map<String, String>> largerTable;
 
         //we are assuming that left is the outer and right is the inner
-        if(customers.size() < orders.size())
+        if(table1.size() < table2.size())
         {
-            smallerTable = customers;
-            largerTable = orders;
+            smallerTable = table1;
+            largerTable = table2;
 
             String leftTable = join[0].split("\\.")[0].trim();
             if(!leftTable.equals("Customers"))
@@ -122,8 +122,8 @@ public class JoinAlgorithm
         }
         else
         {
-            smallerTable = orders;
-            largerTable = customers;
+            smallerTable = table2;
+            largerTable = table1;
 
             String leftTable = join[0].split("\\.")[0].trim();
             if(!leftTable.equals("Orders"))

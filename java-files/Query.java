@@ -18,7 +18,7 @@ public class Query
     public String[] getFilter() { return filter; }
     public String[] getJoin() { return join; }
     public String[] getSelectCols() { return selectCols; }
-
+    public String[] getTables() { return tables; }
     public void ParseMe() throws Exception
     {
         //store query
