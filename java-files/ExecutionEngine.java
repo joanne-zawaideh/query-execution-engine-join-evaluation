@@ -1,13 +1,20 @@
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
 
 public class ExecutionEngine
 {
+    private long executionTime;
+    private int blockAccesses;
+
     public static void ExecuteMe(String joinAlgorithm)
     {
+//        System.currentTimeMillis()
         //read the query
         String query = "";
         try
@@ -81,21 +88,90 @@ public class ExecutionEngine
 
 
 
-            //project the selected columns from whereResult
+            //project the selected columns from whereResult and write the result to a file
             ArrayList<Map<String, String>> finalResult = ProjectOperator.ProjectMe(whereResult,q.getSelectCols());
 
-            for (Map<String, String> row : finalResult) {
+            if(joinAlgorithm.toLowerCase().equals("nested loop"))
+                writeFile("input-files\\nestedLoopResult.txt", finalResult);
+            else
+                writeFile("input-files\\hashResult.txt", finalResult);
 
-                for (Map.Entry<String, String> entry : row.entrySet()) {
-                    System.out.print(entry.getKey() + ": " + entry.getValue() + " | ");
-                }
-                System.out.println();
-            }
-            System.out.println(finalResult.size());
+
+//            //TESTING PURPOSES
+//            for (Map<String, String> row : finalResult) {
+//
+//                for (Map.Entry<String, String> entry : row.entrySet()) {
+//                    System.out.print(entry.getKey() + ": " + entry.getValue() + " | ");
+//                }
+//                System.out.println();
+//            }
+//            System.out.println(finalResult.size());
         }
         catch (Exception e)
         {
             System.out.println("ERROR: " + e.getMessage());
         }
+    }
+
+    private static void writeFile(String path, ArrayList<Map<String, String>> finalResult) throws Exception
+    {
+        try
+        {
+            FileWriter fw = new FileWriter(path);
+            BufferedWriter bw = new BufferedWriter(fw);
+
+            //write performance details
+
+
+            //write result table
+            bw.write("Result Table:");
+            bw.newLine();
+
+            //write column headings
+            Map<String, String> temp = finalResult.get(0);
+            int lineLength = 0;
+            for(String key: temp.keySet())
+            {
+                bw.write(key);
+                lineLength += key.length();
+                //each column will be 30 characters long
+                int numOfSpaces = 30 - key.length();
+                if(numOfSpaces > 0)
+                {
+                    bw.write(" ".repeat(numOfSpaces));
+                    lineLength += numOfSpaces;
+                }
+            }
+            bw.newLine();
+            bw.write("-".repeat(lineLength));
+            bw.newLine();
+
+            //write values of each record
+            for(Map<String, String> record: finalResult)
+            {
+                for(String value: record.values())
+                {
+                    bw.write(value);
+                    int numOfSpaces = 30 - value.length();
+                    if(numOfSpaces > 0)
+                    {
+                        bw.write(" ".repeat(numOfSpaces));
+                    }
+                }
+                bw.newLine();
+            }
+
+
+
+
+
+
+
+        }
+        catch (IOException e)
+        {
+            System.out.println("WRITING ERROR: " + e.getMessage());
+        }
+
     }
 }
