@@ -10,16 +10,21 @@ public class ProjectOperator
 
         //check if cols are valid
         Map<String, String> temp = joinResult.get(0);
-        for(String col: selectCols) {
+        for(String col: selectCols)
+        {
             if(!temp.containsKey(col))
                 throw new Exception("Column " + col + "does not exist");
         }
-        for(String col: selectCols)
-        {
-            for(Map<String, String> record: joinResult)
-            {
 
+
+        for(Map<String, String> record: joinResult)
+        {
+            Map<String, String> projectedRow = new LinkedHashMap<>();
+            for(String col: selectCols)
+            {
+                projectedRow.put(col, record.get(col));
             }
+            result.add(projectedRow);
         }
         return result;
     }

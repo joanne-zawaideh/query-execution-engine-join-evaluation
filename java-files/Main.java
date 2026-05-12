@@ -37,7 +37,8 @@ public class Main
 
 
             ArrayList<Map<String, String>> table = JoinAlgorithm.MeNestedLoop(table1,table2, q1.getJoin());
-            for (Map<String, String> row : table) {
+            ArrayList<Map<String, String>> result = ProjectOperator.ProjectMe(table, q1.getSelectCols());
+            for (Map<String, String> row : result) {
 
                 for (Map.Entry<String, String> entry : row.entrySet()) {
                     System.out.print(entry.getKey() + ": " + entry.getValue() + " | ");

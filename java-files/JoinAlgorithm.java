@@ -54,10 +54,12 @@ public class JoinAlgorithm
         Map<String, String> temp1 = outerTable.get(0);
         Map<String, String> temp2 = innerTable.get(0);
         boolean validCols = true;
+
         if(!temp1.containsKey(left)) validCols = false;
         if(!temp2.containsKey(right)) validCols = false;
         if(!validCols)
             throw new Exception("ERROR: Join on Invalid Columns.");
+
 
         //outer loop accessing the smaller table nB-2 blocks at a time (every ((numberOfBuffers-2)*BFR) records)
         for(int i = 0; i < outerTable.size(); i += ((numberOfBuffers-2)*BFR))
