@@ -1,5 +1,4 @@
-SELECT Customers.customer_id, Orders.order_id
+SELECT Customers.customer_id, Customers.city
 FROM Customers, Orders
-WHERE Orders.customer_id = Customers.customer_id
-AND Customers.membership_type = 'Gold';
+WHERE Customers.city = 'Amman';
 

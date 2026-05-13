@@ -9,12 +9,17 @@ import java.io.FileWriter;
 
 public class ExecutionEngine
 {
-    private long executionTime;
-    private int blockAccesses;
+    private static long executionTime;
+    private static int blockAccesses;
+    private static int bfr;
+    private static int numberOfBuffers;
 
     public static void ExecuteMe(String joinAlgorithm)
     {
-//        System.currentTimeMillis()
+        numberOfBuffers = 7;
+        blockAccesses = 0;
+        bfr = 1000;
+        long startTime = System.currentTimeMillis();
         //read the query
         String query = "";
         try
@@ -39,11 +44,16 @@ public class ExecutionEngine
 
             //Scan the tables in the query
             ArrayList<Map<String, String>> firstTable = ScanOperator.ScanMe(q.getTables()[0]);
+            blockAccesses += Math.ceil(firstTable.size() / bfr);
 
             //we must check if there is a second table in the first place
             ArrayList<Map<String, String>> secondTable = null;
             if(q.getTables().length > 1)
+            {
                 secondTable = ScanOperator.ScanMe(q.getTables()[1]);
+                blockAccesses += Math.ceil(secondTable.size() / bfr);
+            }
+            System.out.println("After scanning: " + blockAccesses);
 
 
 
@@ -59,23 +69,47 @@ public class ExecutionEngine
                     String filterCol = q.getFilter()[0];
                     if(firstTable.get(0).containsKey(filterCol))
                     {
+                        blockAccesses += Math.ceil((float)firstTable.size() / bfr);
                         firstTable = SelectOperator.SelectMe(firstTable, q.getFilter());
                     }
                     else
                     {
+                        blockAccesses += Math.ceil((float)secondTable.size() / bfr);
                         secondTable = SelectOperator.SelectMe(secondTable, q.getFilter());
                     }
+                    System.out.println("After Filter: " + blockAccesses);
                 }
                 if(joinAlgorithm.toLowerCase().equals("nested loop"))
+                {
+                    if(firstTable.size() < secondTable.size())
+                    {
+                        //firstTable is the outerTable
+                        blockAccesses += Math.ceil((float)firstTable.size() / bfr)
+                                + (Math.ceil((float)Math.ceil((float)firstTable.size() / bfr) / (numberOfBuffers - 2)) * Math.ceil((float)secondTable.size() / bfr));
+                    }
+                    else
+                    {
+                        //secondTable is the outerTable
+                        blockAccesses += Math.ceil((float)secondTable.size() / bfr)
+                                + (Math.ceil((float)Math.ceil((float)secondTable.size() / bfr) / (numberOfBuffers - 2)) * Math.ceil((float)firstTable.size() / bfr));
+                    }
                     whereResult = JoinAlgorithm.MeNestedLoop(firstTable, secondTable, q.getJoin());
+
+                }
                 else
+                {
+                    blockAccesses += Math.ceil((float)firstTable.size() / bfr) + Math.ceil((float)secondTable.size() / bfr);
                     whereResult = JoinAlgorithm.MeHashJoin(firstTable, secondTable, q.getJoin());
+                }
+                System.out.println("After Join: " + blockAccesses);
             }
 
             //if join doesn't exist and filter exist (only firstTable exist)
             else if(q.getFilter() != null)
             {
+                blockAccesses += Math.ceil((float)firstTable.size() / bfr);
                 whereResult = SelectOperator.SelectMe(firstTable, q.getFilter());
+                System.out.println("After Filter: " + blockAccesses);
             }
 
 
@@ -88,8 +122,15 @@ public class ExecutionEngine
 
 
 
-            //project the selected columns from whereResult and write the result to a file
+            //project the selected columns from whereResult and write the result to a filter
+            blockAccesses += Math.ceil((float)whereResult.size() / bfr);
             ArrayList<Map<String, String>> finalResult = ProjectOperator.ProjectMe(whereResult,q.getSelectCols());
+
+            System.out.println("After Projection: " + blockAccesses);
+
+            long endTime = System.currentTimeMillis();
+            executionTime = endTime - startTime;
+
 
             if(joinAlgorithm.toLowerCase().equals("nested loop"))
                 writeFile("input-files\\nestedLoopResult.txt", finalResult);
@@ -121,7 +162,13 @@ public class ExecutionEngine
             BufferedWriter bw = new BufferedWriter(fw);
 
             //write performance details
-
+            bw.write("Performance Details:\n");
+            String details = "- BFR = " + bfr + "\n"
+                    + "- Number of Buffers = " + numberOfBuffers + "\n"
+                    + "- Execution Time = " + executionTime + " milliseconds \n"
+                    + "- Number of Blocks Accessed = " + blockAccesses + "\n"
+                    + "- Number of records returned = " + finalResult.size() + "\n\n";
+            bw.write(details);
 
             //write result table
             bw.write("Result Table:");
