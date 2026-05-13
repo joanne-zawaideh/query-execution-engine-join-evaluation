@@ -1,897 +1,223 @@
 Performance Details:
-BFR = 1000
-Number of Buffers = 7
-Execution Time = 1274 milliseconds 
-Number of Blocks Accessed = 42
-Number of records returned = 1050
+- BFR = 100
+- Number of Buffers = 7
+- Execution Time = 410 milliseconds 
+- Number of Blocks Accessed = 406
+- Number of records returned = 213
 
 Result Table:
-Customers.customer_id         Orders.order_id               Customers.city                
-------------------------------------------------------------------------------------------
-7                             3199                          Amman                         
-14                            5007                          Amman                         
-14                            7111                          Amman                         
-22                            674                           Amman                         
-22                            773                           Amman                         
-22                            4343                          Amman                         
-33                            3178                          Amman                         
-61                            1603                          Amman                         
-64                            1067                          Amman                         
-64                            4156                          Amman                         
-64                            8723                          Amman                         
-65                            1028                          Amman                         
-65                            7755                          Amman                         
-72                            4420                          Amman                         
-84                            3790                          Amman                         
-84                            5260                          Amman                         
-84                            9414                          Amman                         
-107                           9567                          Amman                         
-108                           3618                          Amman                         
-108                           6405                          Amman                         
-108                           9603                          Amman                         
-128                           6502                          Amman                         
-128                           7615                          Amman                         
-128                           8711                          Amman                         
-141                           703                           Amman                         
-141                           7464                          Amman                         
-141                           9389                          Amman                         
-149                           1747                          Amman                         
-174                           3104                          Amman                         
-174                           6496                          Amman                         
-220                           6120                          Amman                         
-220                           6697                          Amman                         
-228                           657                           Amman                         
-228                           1654                          Amman                         
-228                           9103                          Amman                         
-247                           1108                          Amman                         
-260                           736                           Amman                         
-270                           952                           Amman                         
-270                           9194                          Amman                         
-286                           5467                          Amman                         
-289                           1811                          Amman                         
-289                           8429                          Amman                         
-298                           7400                          Amman                         
-330                           1981                          Amman                         
-359                           6535                          Amman                         
-359                           7172                          Amman                         
-367                           5942                          Amman                         
-395                           2038                          Amman                         
-395                           4154                          Amman                         
-429                           4442                          Amman                         
-439                           2058                          Amman                         
-449                           83                            Amman                         
-449                           1631                          Amman                         
-453                           8547                          Amman                         
-466                           5356                          Amman                         
-470                           6883                          Amman                         
-482                           597                           Amman                         
-482                           1470                          Amman                         
-496                           8092                          Amman                         
-499                           9971                          Amman                         
-513                           426                           Amman                         
-531                           7106                          Amman                         
-535                           9199                          Amman                         
-539                           16                            Amman                         
-539                           8534                          Amman                         
-549                           6497                          Amman                         
-551                           8406                          Amman                         
-565                           3873                          Amman                         
-585                           2153                          Amman                         
-585                           3318                          Amman                         
-589                           1015                          Amman                         
-607                           252                           Amman                         
-609                           2526                          Amman                         
-609                           9570                          Amman                         
-610                           5353                          Amman                         
-618                           2282                          Amman                         
-639                           2128                          Amman                         
-691                           285                           Amman                         
-691                           7368                          Amman                         
-721                           1786                          Amman                         
-721                           2728                          Amman                         
-725                           4514                          Amman                         
-725                           5809                          Amman                         
-725                           6407                          Amman                         
-763                           3507                          Amman                         
-763                           7112                          Amman                         
-766                           6873                          Amman                         
-766                           9370                          Amman                         
-823                           4203                          Amman                         
-868                           4059                          Amman                         
-868                           9213                          Amman                         
-878                           4055                          Amman                         
-878                           4969                          Amman                         
-888                           4391                          Amman                         
-894                           5019                          Amman                         
-924                           6848                          Amman                         
-944                           8932                          Amman                         
-956                           9018                          Amman                         
-957                           4086                          Amman                         
-963                           6134                          Amman                         
-964                           3975                          Amman                         
-964                           7631                          Amman                         
-973                           3236                          Amman                         
-977                           4126                          Amman                         
-982                           6769                          Amman                         
-1017                          346                           Amman                         
-1021                          4087                          Amman                         
-1021                          9300                          Amman                         
-1033                          2501                          Amman                         
-1033                          2919                          Amman                         
-1033                          6923                          Amman                         
-1067                          8280                          Amman                         
-1101                          6256                          Amman                         
-1116                          2003                          Amman                         
-1143                          5296                          Amman                         
-1143                          9752                          Amman                         
-1145                          376                           Amman                         
-1145                          3457                          Amman                         
-1156                          1006                          Amman                         
-1156                          7065                          Amman                         
-1232                          1435                          Amman                         
-1232                          1966                          Amman                         
-1256                          6266                          Amman                         
-1258                          9162                          Amman                         
-1260                          6563                          Amman                         
-1262                          2941                          Amman                         
-1263                          612                           Amman                         
-1263                          3523                          Amman                         
-1276                          358                           Amman                         
-1278                          1491                          Amman                         
-1278                          9312                          Amman                         
-1281                          9835                          Amman                         
-1288                          2353                          Amman                         
-1310                          5986                          Amman                         
-1310                          6477                          Amman                         
-1345                          8061                          Amman                         
-1389                          4936                          Amman                         
-1398                          149                           Amman                         
-1398                          5835                          Amman                         
-1404                          2036                          Amman                         
-1404                          7333                          Amman                         
-1407                          8301                          Amman                         
-1411                          5971                          Amman                         
-1413                          7883                          Amman                         
-1417                          4177                          Amman                         
-1436                          3821                          Amman                         
-1436                          4096                          Amman                         
-1452                          4066                          Amman                         
-1466                          1451                          Amman                         
-1466                          2144                          Amman                         
-1466                          5853                          Amman                         
-1472                          2961                          Amman                         
-1498                          7437                          Amman                         
-1498                          7885                          Amman                         
-1506                          5434                          Amman                         
-1514                          7410                          Amman                         
-1534                          7833                          Amman                         
-1562                          7722                          Amman                         
-1564                          4261                          Amman                         
-1565                          4422                          Amman                         
-1578                          7982                          Amman                         
-1578                          9886                          Amman                         
-1587                          3659                          Amman                         
-1589                          224                           Amman                         
-1589                          8604                          Amman                         
-1620                          2471                          Amman                         
-1620                          9290                          Amman                         
-1644                          4138                          Amman                         
-1644                          5617                          Amman                         
-1644                          7936                          Amman                         
-1645                          4684                          Amman                         
-1659                          1586                          Amman                         
-1659                          5472                          Amman                         
-1701                          8058                          Amman                         
-1701                          8649                          Amman                         
-1740                          4342                          Amman                         
-1741                          3085                          Amman                         
-1741                          7773                          Amman                         
-1772                          3031                          Amman                         
-1778                          6615                          Amman                         
-1785                          9875                          Amman                         
-1795                          3661                          Amman                         
-1856                          3454                          Amman                         
-1856                          9955                          Amman                         
-1880                          7296                          Amman                         
-1933                          3907                          Amman                         
-1933                          3914                          Amman                         
-1933                          6642                          Amman                         
-1938                          2672                          Amman                         
-1938                          7001                          Amman                         
-1945                          8898                          Amman                         
-1954                          6540                          Amman                         
-1957                          1388                          Amman                         
-1957                          1552                          Amman                         
-1957                          5996                          Amman                         
-1971                          1380                          Amman                         
-1992                          576                           Amman                         
-1997                          1865                          Amman                         
-2023                          2378                          Amman                         
-2086                          8358                          Amman                         
-2091                          1688                          Amman                         
-2099                          5285                          Amman                         
-2099                          8227                          Amman                         
-2100                          124                           Amman                         
-2131                          1048                          Amman                         
-2146                          681                           Amman                         
-2148                          38                            Amman                         
-2148                          2572                          Amman                         
-2149                          4488                          Amman                         
-2166                          788                           Amman                         
-2166                          4232                          Amman                         
-2166                          5344                          Amman                         
-2166                          5562                          Amman                         
-2166                          9882                          Amman                         
-2212                          1959                          Amman                         
-2212                          3732                          Amman                         
-2212                          6122                          Amman                         
-2254                          7136                          Amman                         
-2272                          5589                          Amman                         
-2272                          8915                          Amman                         
-2289                          4033                          Amman                         
-2289                          7317                          Amman                         
-2317                          6436                          Amman                         
-2336                          2238                          Amman                         
-2339                          2590                          Amman                         
-2342                          6710                          Amman                         
-2342                          7080                          Amman                         
-2342                          8222                          Amman                         
-2348                          1198                          Amman                         
-2348                          5734                          Amman                         
-2356                          6359                          Amman                         
-2356                          7118                          Amman                         
-2369                          9938                          Amman                         
-2393                          5689                          Amman                         
-2400                          6412                          Amman                         
-2400                          7850                          Amman                         
-2412                          4881                          Amman                         
-2448                          7753                          Amman                         
-2472                          8157                          Amman                         
-2472                          8730                          Amman                         
-2472                          9500                          Amman                         
-2480                          5133                          Amman                         
-2486                          1892                          Amman                         
-2486                          7998                          Amman                         
-2486                          9528                          Amman                         
-2495                          4473                          Amman                         
-2500                          823                           Amman                         
-2511                          1965                          Amman                         
-2511                          9395                          Amman                         
-2517                          7928                          Amman                         
-2521                          7693                          Amman                         
-2527                          2969                          Amman                         
-2527                          7640                          Amman                         
-2541                          3102                          Amman                         
-2551                          8500                          Amman                         
-2555                          8396                          Amman                         
-2569                          3367                          Amman                         
-2576                          3747                          Amman                         
-2577                          3931                          Amman                         
-2577                          7988                          Amman                         
-2590                          6653                          Amman                         
-2597                          4660                          Amman                         
-2606                          7861                          Amman                         
-2621                          2234                          Amman                         
-2645                          3572                          Amman                         
-2646                          4146                          Amman                         
-2646                          7945                          Amman                         
-2651                          381                           Amman                         
-2651                          9694                          Amman                         
-2655                          1559                          Amman                         
-2655                          4997                          Amman                         
-2655                          5369                          Amman                         
-2658                          9130                          Amman                         
-2660                          5954                          Amman                         
-2660                          9779                          Amman                         
-2664                          2081                          Amman                         
-2664                          9617                          Amman                         
-2669                          4127                          Amman                         
-2681                          3843                          Amman                         
-2681                          7736                          Amman                         
-2686                          523                           Amman                         
-2686                          7004                          Amman                         
-2705                          3195                          Amman                         
-2705                          9292                          Amman                         
-2716                          9346                          Amman                         
-2733                          2318                          Amman                         
-2758                          8313                          Amman                         
-2766                          2605                          Amman                         
-2779                          9386                          Amman                         
-2780                          994                           Amman                         
-2781                          471                           Amman                         
-2781                          9406                          Amman                         
-2803                          5189                          Amman                         
-2803                          8497                          Amman                         
-2838                          2232                          Amman                         
-2838                          5375                          Amman                         
-2838                          9055                          Amman                         
-2853                          2637                          Amman                         
-2881                          4942                          Amman                         
-2881                          8258                          Amman                         
-2888                          7961                          Amman                         
-2896                          3529                          Amman                         
-2896                          9637                          Amman                         
-2898                          3256                          Amman                         
-2898                          4871                          Amman                         
-2898                          6068                          Amman                         
-2902                          1256                          Amman                         
-2913                          3739                          Amman                         
-2913                          8808                          Amman                         
-2926                          8480                          Amman                         
-2926                          8682                          Amman                         
-2973                          218                           Amman                         
-2976                          3727                          Amman                         
-3010                          590                           Amman                         
-3010                          2122                          Amman                         
-3010                          9666                          Amman                         
-3019                          3329                          Amman                         
-3019                          4469                          Amman                         
-3019                          8849                          Amman                         
-3019                          9861                          Amman                         
-3021                          9460                          Amman                         
-3036                          7                             Amman                         
-3043                          2872                          Amman                         
-3073                          3459                          Amman                         
-3073                          9113                          Amman                         
-3105                          9260                          Amman                         
-3116                          8310                          Amman                         
-3116                          9937                          Amman                         
-3118                          5249                          Amman                         
-3118                          9329                          Amman                         
-3122                          9135                          Amman                         
-3130                          8654                          Amman                         
-3133                          4029                          Amman                         
-3133                          6650                          Amman                         
-3140                          839                           Amman                         
-3149                          9497                          Amman                         
-3150                          6005                          Amman                         
-3158                          6295                          Amman                         
-3159                          5649                          Amman                         
-3163                          8955                          Amman                         
-3164                          2158                          Amman                         
-3164                          7077                          Amman                         
-3169                          4043                          Amman                         
-3183                          2185                          Amman                         
-3183                          7262                          Amman                         
-3184                          7240                          Amman                         
-3227                          604                           Amman                         
-3318                          3875                          Amman                         
-3338                          3892                          Amman                         
-3343                          1309                          Amman                         
-3364                          6078                          Amman                         
-3367                          3001                          Amman                         
-3379                          899                           Amman                         
-3396                          7564                          Amman                         
-3397                          6949                          Amman                         
-3399                          6539                          Amman                         
-3430                          3490                          Amman                         
-3433                          2453                          Amman                         
-3433                          6992                          Amman                         
-3441                          2608                          Amman                         
-3441                          7820                          Amman                         
-3443                          7243                          Amman                         
-3449                          8570                          Amman                         
-3458                          3437                          Amman                         
-3458                          5297                          Amman                         
-3482                          1677                          Amman                         
-3484                          2169                          Amman                         
-3488                          9037                          Amman                         
-3496                          1812                          Amman                         
-3496                          5342                          Amman                         
-3519                          1024                          Amman                         
-3519                          3563                          Amman                         
-3533                          2724                          Amman                         
-3533                          4454                          Amman                         
-3540                          2929                          Amman                         
-3550                          3244                          Amman                         
-3550                          8145                          Amman                         
-3585                          3803                          Amman                         
-3585                          7174                          Amman                         
-3589                          1143                          Amman                         
-3594                          8659                          Amman                         
-3613                          5684                          Amman                         
-3613                          7493                          Amman                         
-3613                          9083                          Amman                         
-3640                          4987                          Amman                         
-3641                          6212                          Amman                         
-3651                          4883                          Amman                         
-3672                          5882                          Amman                         
-3681                          1345                          Amman                         
-3682                          9591                          Amman                         
-3682                          9949                          Amman                         
-3683                          5556                          Amman                         
-3705                          9593                          Amman                         
-3720                          930                           Amman                         
-3720                          9437                          Amman                         
-3726                          4280                          Amman                         
-3729                          2250                          Amman                         
-3729                          6236                          Amman                         
-3746                          2359                          Amman                         
-3746                          4866                          Amman                         
-3746                          7425                          Amman                         
-3752                          371                           Amman                         
-3752                          1717                          Amman                         
-3780                          5667                          Amman                         
-3780                          7326                          Amman                         
-3780                          8697                          Amman                         
-3789                          5304                          Amman                         
-3814                          3127                          Amman                         
-3814                          9664                          Amman                         
-3815                          8693                          Amman                         
-3824                          4518                          Amman                         
-3834                          846                           Amman                         
-3834                          2275                          Amman                         
-3857                          2494                          Amman                         
-3879                          2115                          Amman                         
-3879                          3611                          Amman                         
-3882                          2301                          Amman                         
-3898                          2487                          Amman                         
-3898                          3029                          Amman                         
-3898                          9731                          Amman                         
-3901                          6366                          Amman                         
-3950                          3098                          Amman                         
-3986                          2053                          Amman                         
-4041                          4970                          Amman                         
-4091                          2811                          Amman                         
-4103                          9580                          Amman                         
-4113                          2188                          Amman                         
-4113                          3745                          Amman                         
-4113                          7726                          Amman                         
-4119                          1955                          Amman                         
-4122                          740                           Amman                         
-4122                          5422                          Amman                         
-4163                          1020                          Amman                         
-4163                          1862                          Amman                         
-4163                          3717                          Amman                         
-4163                          8892                          Amman                         
-4168                          6501                          Amman                         
-4168                          6654                          Amman                         
-4177                          1420                          Amman                         
-4187                          1046                          Amman                         
-4187                          6334                          Amman                         
-4233                          1279                          Amman                         
-4234                          6318                          Amman                         
-4234                          8154                          Amman                         
-4268                          6444                          Amman                         
-4269                          5387                          Amman                         
-4269                          6691                          Amman                         
-4276                          2937                          Amman                         
-4296                          1037                          Amman                         
-4304                          6015                          Amman                         
-4312                          8829                          Amman                         
-4318                          3986                          Amman                         
-4324                          881                           Amman                         
-4328                          1414                          Amman                         
-4331                          6862                          Amman                         
-4346                          1440                          Amman                         
-4346                          3541                          Amman                         
-4361                          2704                          Amman                         
-4361                          7812                          Amman                         
-4367                          2334                          Amman                         
-4409                          2461                          Amman                         
-4412                          793                           Amman                         
-4412                          2497                          Amman                         
-4412                          7284                          Amman                         
-4429                          4771                          Amman                         
-4429                          9109                          Amman                         
-4441                          7202                          Amman                         
-4441                          8689                          Amman                         
-4480                          7709                          Amman                         
-4486                          4800                          Amman                         
-4486                          9108                          Amman                         
-4505                          2145                          Amman                         
-4505                          4015                          Amman                         
-4505                          7414                          Amman                         
-4505                          8492                          Amman                         
-4511                          1328                          Amman                         
-4511                          1893                          Amman                         
-4514                          8720                          Amman                         
-4516                          273                           Amman                         
-4516                          782                           Amman                         
-4516                          9776                          Amman                         
-4535                          1449                          Amman                         
-4558                          2290                          Amman                         
-4558                          5500                          Amman                         
-4558                          9610                          Amman                         
-4561                          4334                          Amman                         
-4561                          6505                          Amman                         
-4564                          3170                          Amman                         
-4567                          2729                          Amman                         
-4570                          4575                          Amman                         
-4597                          2208                          Amman                         
-4597                          7199                          Amman                         
-4597                          9917                          Amman                         
-4604                          4239                          Amman                         
-4606                          2964                          Amman                         
-4632                          8960                          Amman                         
-4634                          6239                          Amman                         
-4635                          5403                          Amman                         
-4635                          5881                          Amman                         
-4635                          6453                          Amman                         
-4638                          1569                          Amman                         
-4638                          6016                          Amman                         
-4648                          3604                          Amman                         
-4653                          7775                          Amman                         
-4656                          979                           Amman                         
-4659                          1089                          Amman                         
-4694                          575                           Amman                         
-4694                          8076                          Amman                         
-4695                          1750                          Amman                         
-4697                          469                           Amman                         
-4697                          7267                          Amman                         
-4705                          8094                          Amman                         
-4728                          2833                          Amman                         
-4738                          4824                          Amman                         
-4753                          6895                          Amman                         
-4786                          337                           Amman                         
-4786                          1373                          Amman                         
-4786                          4169                          Amman                         
-4786                          5054                          Amman                         
-4788                          1819                          Amman                         
-4794                          7805                          Amman                         
-4794                          9718                          Amman                         
-4820                          9855                          Amman                         
-4829                          5442                          Amman                         
-4829                          9424                          Amman                         
-4852                          1050                          Amman                         
-4852                          7134                          Amman                         
-4866                          6229                          Amman                         
-4875                          6041                          Amman                         
-4921                          17                            Amman                         
-4921                          45                            Amman                         
-4921                          7948                          Amman                         
-4924                          3536                          Amman                         
-4924                          4717                          Amman                         
-4924                          5284                          Amman                         
-4929                          3815                          Amman                         
-4929                          5198                          Amman                         
-4929                          7026                          Amman                         
-4933                          1886                          Amman                         
-4933                          4273                          Amman                         
-4955                          6892                          Amman                         
-4960                          2205                          Amman                         
-4974                          791                           Amman                         
-4975                          25                            Amman                         
-4975                          666                           Amman                         
-4975                          2843                          Amman                         
-4975                          4680                          Amman                         
-4980                          4267                          Amman                         
-4980                          8552                          Amman                         
-4988                          5994                          Amman                         
-5044                          1457                          Amman                         
-5044                          1576                          Amman                         
-5044                          1600                          Amman                         
-5044                          2554                          Amman                         
-5078                          4984                          Amman                         
-5090                          504                           Amman                         
-5105                          729                           Amman                         
-5105                          6509                          Amman                         
-5105                          8050                          Amman                         
-5116                          3686                          Amman                         
-5116                          9863                          Amman                         
-5127                          8508                          Amman                         
-5127                          8976                          Amman                         
-5141                          7020                          Amman                         
-5142                          3149                          Amman                         
-5142                          5319                          Amman                         
-5142                          6045                          Amman                         
-5188                          9888                          Amman                         
-5189                          6925                          Amman                         
-5198                          6174                          Amman                         
-5212                          6102                          Amman                         
-5382                          588                           Amman                         
-5382                          6936                          Amman                         
-5396                          1293                          Amman                         
-5405                          5363                          Amman                         
-5407                          3086                          Amman                         
-5407                          3744                          Amman                         
-5407                          6711                          Amman                         
-5411                          40                            Amman                         
-5411                          913                           Amman                         
-5411                          3750                          Amman                         
-5413                          2164                          Amman                         
-5413                          9929                          Amman                         
-5425                          7744                          Amman                         
-5432                          1123                          Amman                         
-5432                          1756                          Amman                         
-5451                          9186                          Amman                         
-5468                          66                            Amman                         
-5474                          44                            Amman                         
-5474                          3463                          Amman                         
-5474                          5396                          Amman                         
-5486                          1341                          Amman                         
-5535                          9645                          Amman                         
-5549                          606                           Amman                         
-5549                          7592                          Amman                         
-5549                          8316                          Amman                         
-5583                          3699                          Amman                         
-5587                          1766                          Amman                         
-5596                          5892                          Amman                         
-5602                          5915                          Amman                         
-5617                          9679                          Amman                         
-5619                          4694                          Amman                         
-5619                          7133                          Amman                         
-5620                          1230                          Amman                         
-5620                          1770                          Amman                         
-5620                          2760                          Amman                         
-5620                          6394                          Amman                         
-5620                          7011                          Amman                         
-5638                          1018                          Amman                         
-5638                          1645                          Amman                         
-5638                          3832                          Amman                         
-5638                          6194                          Amman                         
-5646                          7845                          Amman                         
-5661                          836                           Amman                         
-5724                          6245                          Amman                         
-5734                          904                           Amman                         
-5752                          847                           Amman                         
-5752                          2942                          Amman                         
-5752                          4424                          Amman                         
-5755                          7660                          Amman                         
-5755                          8459                          Amman                         
-5780                          6451                          Amman                         
-5799                          7528                          Amman                         
-5800                          7201                          Amman                         
-5807                          2515                          Amman                         
-5807                          2958                          Amman                         
-5807                          4245                          Amman                         
-5827                          8578                          Amman                         
-5832                          7476                          Amman                         
-5838                          1049                          Amman                         
-5838                          9163                          Amman                         
-5853                          8938                          Amman                         
-5864                          3414                          Amman                         
-5867                          601                           Amman                         
-5867                          813                           Amman                         
-5867                          1609                          Amman                         
-5903                          1875                          Amman                         
-5903                          4995                          Amman                         
-5903                          5307                          Amman                         
-5903                          6872                          Amman                         
-5912                          1997                          Amman                         
-5912                          7970                          Amman                         
-5918                          4517                          Amman                         
-5918                          8614                          Amman                         
-5918                          8716                          Amman                         
-5932                          490                           Amman                         
-5942                          339                           Amman                         
-5969                          5854                          Amman                         
-5969                          9231                          Amman                         
-5978                          9158                          Amman                         
-5979                          5113                          Amman                         
-6006                          5678                          Amman                         
-6006                          8008                          Amman                         
-6014                          7266                          Amman                         
-6014                          7387                          Amman                         
-6014                          7865                          Amman                         
-6023                          5004                          Amman                         
-6023                          5887                          Amman                         
-6043                          4957                          Amman                         
-6055                          3764                          Amman                         
-6055                          4354                          Amman                         
-6055                          5254                          Amman                         
-6055                          7728                          Amman                         
-6063                          670                           Amman                         
-6063                          2850                          Amman                         
-6071                          386                           Amman                         
-6071                          6283                          Amman                         
-6071                          9276                          Amman                         
-6092                          1712                          Amman                         
-6096                          2410                          Amman                         
-6096                          6083                          Amman                         
-6100                          5217                          Amman                         
-6137                          4382                          Amman                         
-6209                          3942                          Amman                         
-6209                          4278                          Amman                         
-6224                          7273                          Amman                         
-6230                          6568                          Amman                         
-6230                          8144                          Amman                         
-6252                          4372                          Amman                         
-6252                          6138                          Amman                         
-6265                          5373                          Amman                         
-6274                          5366                          Amman                         
-6274                          7238                          Amman                         
-6287                          3811                          Amman                         
-6288                          4380                          Amman                         
-6291                          3197                          Amman                         
-6295                          4460                          Amman                         
-6316                          1674                          Amman                         
-6316                          5518                          Amman                         
-6382                          4196                          Amman                         
-6382                          7465                          Amman                         
-6383                          7337                          Amman                         
-6412                          5626                          Amman                         
-6412                          9486                          Amman                         
-6434                          4521                          Amman                         
-6434                          8200                          Amman                         
-6438                          683                           Amman                         
-6461                          607                           Amman                         
-6464                          4412                          Amman                         
-6464                          7190                          Amman                         
-6464                          7854                          Amman                         
-6511                          9844                          Amman                         
-6535                          9525                          Amman                         
-6535                          9818                          Amman                         
-6538                          5051                          Amman                         
-6548                          6342                          Amman                         
-6556                          1695                          Amman                         
-6556                          4275                          Amman                         
-6601                          7283                          Amman                         
-6609                          3446                          Amman                         
-6609                          8743                          Amman                         
-6628                          1356                          Amman                         
-6646                          9444                          Amman                         
-6651                          4714                          Amman                         
-6651                          9178                          Amman                         
-6655                          5371                          Amman                         
-6693                          445                           Amman                         
-6695                          53                            Amman                         
-6712                          193                           Amman                         
-6712                          669                           Amman                         
-6715                          5312                          Amman                         
-6718                          1320                          Amman                         
-6718                          5224                          Amman                         
-6753                          1641                          Amman                         
-6753                          3691                          Amman                         
-6768                          7840                          Amman                         
-6770                          6397                          Amman                         
-6770                          9560                          Amman                         
-6770                          9606                          Amman                         
-6798                          8816                          Amman                         
-6830                          348                           Amman                         
-6834                          2680                          Amman                         
-6855                          9035                          Amman                         
-6891                          101                           Amman                         
-6910                          6999                          Amman                         
-6918                          6310                          Amman                         
-6919                          6780                          Amman                         
-6919                          6901                          Amman                         
-6959                          9640                          Amman                         
-6973                          2268                          Amman                         
-7008                          4711                          Amman                         
-7013                          1400                          Amman                         
-7018                          2199                          Amman                         
-7018                          6160                          Amman                         
-7037                          4652                          Amman                         
-7037                          5764                          Amman                         
-7056                          3616                          Amman                         
-7056                          9834                          Amman                         
-7058                          718                           Amman                         
-7059                          2027                          Amman                         
-7059                          9363                          Amman                         
-7061                          1242                          Amman                         
-7061                          2642                          Amman                         
-7061                          9354                          Amman                         
-7087                          2343                          Amman                         
-7087                          3936                          Amman                         
-7088                          2007                          Amman                         
-7093                          6129                          Amman                         
-7155                          9176                          Amman                         
-7193                          4902                          Amman                         
-7193                          5628                          Amman                         
-7193                          5901                          Amman                         
-7207                          1763                          Amman                         
-7240                          6163                          Amman                         
-7240                          7882                          Amman                         
-7248                          7525                          Amman                         
-7279                          5899                          Amman                         
-7279                          8177                          Amman                         
-7330                          8103                          Amman                         
-7346                          2093                          Amman                         
-7353                          6729                          Amman                         
-7353                          7827                          Amman                         
-7366                          1036                          Amman                         
-7366                          6228                          Amman                         
-7366                          8645                          Amman                         
-7366                          9920                          Amman                         
-7371                          2408                          Amman                         
-7372                          7376                          Amman                         
-7400                          5542                          Amman                         
-7426                          5766                          Amman                         
-7426                          7103                          Amman                         
-7436                          6051                          Amman                         
-7479                          4091                          Amman                         
-7517                          943                           Amman                         
-7518                          1740                          Amman                         
-7518                          3937                          Amman                         
-7527                          9713                          Amman                         
-7540                          9173                          Amman                         
-7562                          542                           Amman                         
-7562                          2196                          Amman                         
-7572                          6246                          Amman                         
-7595                          2177                          Amman                         
-7595                          2934                          Amman                         
-7595                          3932                          Amman                         
-7623                          11                            Amman                         
-7623                          6055                          Amman                         
-7623                          8670                          Amman                         
-7631                          8744                          Amman                         
-7631                          9021                          Amman                         
-7653                          1264                          Amman                         
-7653                          2577                          Amman                         
-7653                          9347                          Amman                         
-7661                          5465                          Amman                         
-7662                          2111                          Amman                         
-7689                          8951                          Amman                         
-7713                          9399                          Amman                         
-7714                          3789                          Amman                         
-7719                          6247                          Amman                         
-7740                          2138                          Amman                         
-7796                          9478                          Amman                         
-7810                          2661                          Amman                         
-7810                          2725                          Amman                         
-7820                          4655                          Amman                         
-7860                          4588                          Amman                         
-7872                          7904                          Amman                         
-7884                          4414                          Amman                         
-7888                          180                           Amman                         
-7917                          2719                          Amman                         
-7917                          2741                          Amman                         
-7939                          3908                          Amman                         
-7965                          7786                          Amman                         
-7969                          2730                          Amman                         
-7969                          3709                          Amman                         
-7969                          3818                          Amman                         
-7969                          4951                          Amman                         
-7984                          5843                          Amman                         
-8003                          158                           Amman                         
-8003                          1657                          Amman                         
-8030                          8939                          Amman                         
-8046                          1858                          Amman                         
-8073                          2598                          Amman                         
-8073                          6484                          Amman                         
-8098                          540                           Amman                         
-8098                          9991                          Amman                         
-8117                          2073                          Amman                         
-8138                          2459                          Amman                         
-8148                          857                           Amman                         
-8150                          3704                          Amman                         
-8150                          8987                          Amman                         
-8150                          9536                          Amman                         
-8159                          5135                          Amman                         
-8192                          2482                          Amman                         
-8193                          2663                          Amman                         
-8193                          8142                          Amman                         
-8204                          360                           Amman                         
-8221                          935                           Amman                         
-8230                          3354                          Amman                         
-8230                          6426                          Amman                         
-8230                          6487                          Amman                         
-8230                          7166                          Amman                         
-8241                          1560                          Amman                         
-8241                          1808                          Amman                         
-8241                          9305                          Amman                         
-8251                          7179                          Amman                         
-8282                          6964                          Amman                         
-8299                          526                           Amman                         
-8299                          3071                          Amman                         
-8321                          9482                          Amman                         
-8331                          2603                          Amman                         
-8331                          4456                          Amman                         
-8338                          4661                          Amman                         
-8341                          5656                          Amman                         
-8348                          7834                          Amman                         
-8371                          69                            Amman                         
-8373                          9019                          Amman                         
-8375                          6009                          Amman                         
-8375                          6052                          Amman                         
-8436                          2448                          Amman                         
-8436                          2495                          Amman                         
-8436                          9451                          Amman                         
-8437                          5343                          Amman                         
-8464                          6597                          Amman                         
-8486                          948                           Amman                         
-8493                          2632                          Amman                         
-8493                          3073                          Amman                         
-8493                          8348                          Amman                         
-8496                          1437                          Amman                         
-8496                          2984                          Amman                         
-8517                          2097                          Amman                         
-8517                          7388                          Amman                         
-8537                          1172                          Amman                         
-8542                          4020                          Amman                         
-8542                          8283                          Amman                         
-8562                          3230                          Amman                         
-8562                          7735                          Amman                         
-8573                          455                           Amman                         
-8576                          6308                   
+Orders.order_id               Customers.customer_id         
+------------------------------------------------------------
+57                            8980                          
+61                            6460                          
+71                            4998                          
+183                           3657                          
+335                           4162                          
+375                           5568                          
+448                           702                           
+450                           3913                          
+579                           2427                          
+595                           8262                          
+613                           9376                          
+780                           1459                          
+792                           9295                          
+806                           9739                          
+845                           9536                          
+861                           2947                          
+1114                          1236                          
+1186                          7990                          
+1214                          329                           
+1280                          2886                          
+1297                          2056                          
+1300                          5991                          
+1472                          3334                          
+1574                          1661                          
+1587                          9682                          
+1614                          8764                          
+1635                          5709                          
+1647                          2275                          
+1700                          5821                          
+1884                          8135                          
+1918                          4306                          
+1949                          4196                          
+1996                          7201                          
+2010                          6008                          
+2047                          9127                          
+2072                          1447                          
+2139                          4108                          
+2186                          4173                          
+2198                          114                           
+2234                          2621                          
+2241                          6574                          
+2317                          8258                          
+2350                          6114                          
+2352                          1528                          
+2416                          2274                          
+2558                          8247                          
+2594                          9378                          
+2632                          8493                          
+2662                          4458                          
+2718                          6427                          
+2724                          3533                          
+2740                          1468                          
+2742                          7526                          
+2753                          3948                          
+2821                          3292                          
+2822                          1297                          
+2847                          7696                          
+2880                          3619                          
+2882                          8097                          
+3028                          1007                          
+3071                          8299                          
+3167                          4021                          
+3217                          8382                          
+3288                          402                           
+3294                          8859                          
+3313                          9804                          
+3378                          5720                          
+3416                          805                           
+3422                          2221                          
+3429                          9994                          
+3438                          2987                          
+3439                          3851                          
+3447                          2684                          
+3474                          6410                          
+3563                          3519                          
+3708                          2522                          
+3738                          2738                          
+3845                          8543                          
+3863                          8705                          
+3950                          6954                          
+3974                          587                           
+4058                          9936                          
+4065                          6707                          
+4094                          9180                          
+4195                          6327                          
+4249                          1167                          
+4647                          9332                          
+4683                          5393                          
+4721                          4355                          
+4737                          7210                          
+4746                          7224                          
+4804                          2701                          
+4820                          1409                          
+4937                          7854                          
+4938                          6004                          
+4947                          9471                          
+5095                          928                           
+5132                          7469                          
+5134                          1474                          
+5248                          4736                          
+5326                          3677                          
+5331                          4446                          
+5391                          2183                          
+5394                          1477                          
+5401                          2594                          
+5409                          4069                          
+5422                          4122                          
+5455                          1335                          
+5483                          8445                          
+5488                          5077                          
+5534                          4393                          
+5539                          9883                          
+5542                          7400                          
+5577                          160                           
+5606                          6884                          
+5695                          8968                          
+5769                          4403                          
+5774                          8358                          
+5810                          3219                          
+5813                          7523                          
+5856                          143                           
+5876                          5121                          
+5988                          4330                          
+6226                          328                           
+6276                          3659                          
+6286                          5773                          
+6332                          8041                          
+6336                          1979                          
+6408                          5950                          
+6422                          7581                          
+6467                          6009                          
+6473                          5024                          
+6484                          8073                          
+6502                          128                           
+6612                          271                           
+6676                          7822                          
+6701                          7369                          
+6750                          2802                          
+6763                          3154                          
+6778                          7686                          
+6802                          1575                          
+6855                          3709                          
+6887                          1303                          
+6929                          5099                          
+6953                          2134                          
+6984                          5810                          
+6999                          6910                          
+7006                          2304                          
+7061                          6146                          
+7198                          8565                          
+7237                          6284                          
+7247                          6963                          
+7250                          5305                          
+7263                          7273                          
+7367                          8663                          
+7420                          1229                          
+7460                          1040                          
+7513                          8636                          
+7524                          6154                          
+7593                          6253                          
+7597                          2221                          
+7644                          7385                          
+7719                          4325                          
+7747                          7110                          
+7756                          6968                          
+7811                          6533                          
+7867                          4538                          
+7901                          8579                          
+7951                          6278                          
+7969                          5520                          
+7978                          9044                          
+7986                          4592                          
+7987                          9584                          
+8052                          7728                          
+8053                          6983                          
+8069                          8133                          
+8124                          4106                          
+8136                          4754                          
+8221                          7470                          
+8283                          8542                          
+8305                          9755                          
+8309                          696                           
+8323                          6792                          
+8393                          6435                          
+8401                          4293                          
+8410                          1787                          
+8450                          8732                          
+8533                          9768                          
+8640                          1528                          
+8754                          5866                          
+8787                          2232                          
+8844                          6418                          
+9015                          6762                          
+9113                          3073                          
+9136                          6999                          
+9184                          1267                          
+9226                          7202                          
+9284                          2299                          
+9338                          7146                          
+9422                          399                           
+9427                          1590                          
+9438                          9928                          
+9452                          7659                          
+9467                          1845                          
+9487                          3005                          
+9494                          5723                          
+9555                          1008                          
+9713                          7527                          
+9721                          8057                          
+9733                          9927                          
+9825                          7728                          
+9938                          2369                          
+9961                          1680                          

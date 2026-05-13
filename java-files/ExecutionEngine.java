@@ -18,7 +18,7 @@ public class ExecutionEngine
     {
         numberOfBuffers = 7;
         blockAccesses = 0;
-        bfr = 1000;
+        bfr = 100;
         long startTime = System.currentTimeMillis();
         //read the query
         String query = "";
@@ -41,7 +41,6 @@ public class ExecutionEngine
             q.ParseMe();
 
 
-
             //Scan the tables in the query
             ArrayList<Map<String, String>> firstTable = ScanOperator.ScanMe(q.getTables()[0]);
             blockAccesses += Math.ceil(firstTable.size() / bfr);
@@ -54,7 +53,6 @@ public class ExecutionEngine
                 blockAccesses += Math.ceil(secondTable.size() / bfr);
             }
             System.out.println("After scanning: " + blockAccesses);
-
 
 
             //Execute where condition(s)
@@ -94,7 +92,6 @@ public class ExecutionEngine
                                 + (Math.ceil((float)Math.ceil((float)secondTable.size() / bfr) / (numberOfBuffers - 2)) * Math.ceil((float)firstTable.size() / bfr));
                     }
                     whereResult = JoinAlgorithm.MeNestedLoop(firstTable, secondTable, q.getJoin());
-
                 }
                 else
                 {
@@ -120,8 +117,6 @@ public class ExecutionEngine
             }
 
 
-
-
             //project the selected columns from whereResult and write the result to a filter
             blockAccesses += Math.ceil((float)whereResult.size() / bfr);
             ArrayList<Map<String, String>> finalResult = ProjectOperator.ProjectMe(whereResult,q.getSelectCols());
@@ -131,12 +126,10 @@ public class ExecutionEngine
             long endTime = System.currentTimeMillis();
             executionTime = endTime - startTime;
 
-
             if(joinAlgorithm.toLowerCase().equals("nested loop"))
                 writeFile("input-files\\nestedLoopResult.txt", finalResult);
             else
                 writeFile("input-files\\hashResult.txt", finalResult);
-
 
 //            //TESTING PURPOSES
 //            for (Map<String, String> row : finalResult) {
@@ -169,7 +162,6 @@ public class ExecutionEngine
                     + "- Number of Blocks Accessed = " + blockAccesses + "\n"
                     + "- Number of records returned = " + finalResult.size() + "\n\n";
             bw.write(details);
-
             //write result table
             bw.write("Result Table:");
             bw.newLine();
@@ -207,13 +199,7 @@ public class ExecutionEngine
                 }
                 bw.newLine();
             }
-
-
-
-
-
-
-
+            bw.close();
         }
         catch (IOException e)
         {

@@ -1,4 +1,5 @@
-SELECT Customers.customer_id, Customers.city
+SELECT Orders.order_id, Customers.customer_id
 FROM Customers, Orders
-WHERE Customers.city = 'Amman';
+WHERE Customers.customer_id = Orders.customer_id
+AND Orders.amount < 200;
 
