@@ -35,7 +35,8 @@ public class ExecutionEngine
         filterBlock = 0;
         joinBlock = 0;
         projectBlock = 0;
-        long startTime = System.currentTimeMillis();
+
+
         //read the query
         String query = "";
         try
@@ -58,23 +59,26 @@ public class ExecutionEngine
 
 
             //Scan the tables in the query
+            long startOfScan = System.currentTimeMillis();
             ArrayList<Map<String, String>> firstTable = ScanOperator.ScanMe(q.getTables()[0]);
-            blockAccesses += Math.ceil(firstTable.size() / bfr);
-            scanBlock += Math.ceil(firstTable.size() / bfr);
+            blockAccesses += Math.ceil((float)firstTable.size() / bfr);
+            scanBlock += Math.ceil((float)firstTable.size() / bfr);
+
 
             //we must check if there is a second table in the first place
             ArrayList<Map<String, String>> secondTable = null;
             if(q.getTables().length > 1)
             {
                 secondTable = ScanOperator.ScanMe(q.getTables()[1]);
-                blockAccesses += Math.ceil(secondTable.size() / bfr);
-                scanBlock += Math.ceil(secondTable.size() / bfr);
+                blockAccesses += Math.ceil((float)secondTable.size() / bfr);
+                scanBlock += Math.ceil((float)secondTable.size() / bfr);
             }
-            System.out.println("After scanning: " + blockAccesses);
+            scanTime = System.currentTimeMillis() - startOfScan;
 
 
             //Execute where condition(s)
             ArrayList<Map<String, String>> whereResult;
+            long startOfFilter, startOfJoin;
 
             //if join exists (there are two tables)
             if(q.getJoin() != null)
@@ -82,6 +86,7 @@ public class ExecutionEngine
                 //if filter condition exists
                 if(q.getFilter() != null)
                 {
+                    startOfFilter = System.currentTimeMillis();
                     String filterCol = q.getFilter()[0];
                     if(firstTable.get(0).containsKey(filterCol))
                     {
@@ -95,8 +100,9 @@ public class ExecutionEngine
                         blockAccesses += Math.ceil((float)secondTable.size() / bfr);
                         secondTable = SelectOperator.SelectMe(secondTable, q.getFilter());
                     }
-                    System.out.println("After Filter: " + blockAccesses);
+                    filterTime = System.currentTimeMillis() - startOfFilter;
                 }
+
                 if(joinAlgorithm.toLowerCase().equals("nested loop"))
                 {
                     if(firstTable.size() < secondTable.size())
@@ -117,15 +123,18 @@ public class ExecutionEngine
                         joinBlock += Math.ceil((float)secondTable.size() / bfr)
                                 + (Math.ceil((float)Math.ceil((float)secondTable.size() / bfr) / (numberOfBuffers - 2)) * Math.ceil((float)firstTable.size() / bfr));
                     }
+                    startOfJoin = System.currentTimeMillis();
                     whereResult = JoinAlgorithm.MeNestedLoop(firstTable, secondTable, q.getJoin());
+                    joinTime = System.currentTimeMillis() - startOfJoin;
                 }
                 else
                 {
                     joinBlock += Math.ceil((float)firstTable.size() / bfr) + Math.ceil((float)secondTable.size() / bfr);
                     blockAccesses += Math.ceil((float)firstTable.size() / bfr) + Math.ceil((float)secondTable.size() / bfr);
+                    startOfJoin = System.currentTimeMillis();
                     whereResult = JoinAlgorithm.MeHashJoin(firstTable, secondTable, q.getJoin());
+                    joinTime = System.currentTimeMillis() - startOfJoin;
                 }
-                System.out.println("After Join: " + blockAccesses);
             }
 
             //if join doesn't exist and filter exist (only firstTable exist)
@@ -133,8 +142,9 @@ public class ExecutionEngine
             {
                 filterBlock += Math.ceil((float)firstTable.size() / bfr);
                 blockAccesses += Math.ceil((float)firstTable.size() / bfr);
+                startOfFilter = System.currentTimeMillis();
                 whereResult = SelectOperator.SelectMe(firstTable, q.getFilter());
-                System.out.println("After Filter: " + blockAccesses);
+                filterTime = System.currentTimeMillis() - startOfFilter;
             }
 
 
@@ -142,18 +152,20 @@ public class ExecutionEngine
             else
             {
                 whereResult = firstTable;
+                filterTime = 0;
+                joinTime = 0;
             }
 
 
             //project the selected columns from whereResult and write the result to a filter
             projectBlock += Math.ceil((float)whereResult.size() / bfr);
             blockAccesses += Math.ceil((float)whereResult.size() / bfr);
+            long startOfProject = System.currentTimeMillis();
             ArrayList<Map<String, String>> finalResult = ProjectOperator.ProjectMe(whereResult,q.getSelectCols());
+            projectTime = System.currentTimeMillis() - startOfProject;
 
-            System.out.println("After Projection: " + blockAccesses);
 
-            long endTime = System.currentTimeMillis();
-            executionTime = endTime - startTime;
+            executionTime = scanTime + filterTime + joinTime + projectTime;
 
             if(joinAlgorithm.toLowerCase().equals("nested loop"))
                 writeFile("input-files\\nestedLoopResult.txt", finalResult);
@@ -187,8 +199,16 @@ public class ExecutionEngine
             bw.write("Performance Details:\n");
             String details = "- BFR = " + bfr + "\n"
                     + "- Number of Buffers = " + numberOfBuffers + "\n"
-                    + "- Execution Time = " + executionTime + " milliseconds \n"
-                    + "- Number of Blocks Accessed = " + blockAccesses + "\n"
+                    + "- Total Execution Time = " + executionTime + " ms \n\t"
+                    + "1) Scan Time = " + scanTime + " ms \n\t"
+                    + "2) Select Time = " + filterTime + " ms \n\t"
+                    + "3) Join Time = " + joinTime + " ms \n\t"
+                    + "4) Project Time = " + projectTime + " ms \n"
+                    + "- Total Number of Blocks Accessed = " + blockAccesses + "\n\t"
+                    + "1) Scan Block Accesses = " + scanBlock + "\n\t"
+                    + "2) Select Block Accesses = " + filterBlock + "\n\t"
+                    + "3) Join Block Accesses = " + joinBlock + "\n\t"
+                    + "4) Project Block Accesses = " + projectBlock + "\n"
                     + "- Number of records returned = " + finalResult.size() + "\n\n";
             bw.write(details);
             //write result table
