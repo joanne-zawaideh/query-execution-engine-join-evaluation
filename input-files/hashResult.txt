@@ -1,17 +1,18 @@
 Performance Details:
 - BFR = 100
 - Number of Buffers = 7
-- Total Execution Time = 73 ms 
-	1) Scan Time = 42 ms 
-	2) Select Time = 8 ms 
-	3) Join Time = 20 ms 
-	4) Project Time = 3 ms 
+- Total Execution Time = 109 ms 
+	1) Scan Time = 64 ms 
+	2) Select Time = 11 ms 
+	3) Join Time = 30 ms 
+	4) Project Time = 4 ms 
 - Total Number of Blocks Accessed = 502
 	1) Scan Block Accesses = 200
 	2) Select Block Accesses = 100
 	3) Join Block Accesses = 151
 	4) Project Block Accesses = 51
 - Number of records returned = 5048
+
 Result Table:
 Orders.order_id               Customers.customer_id         
 ------------------------------------------------------------
