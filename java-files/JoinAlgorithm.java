@@ -65,32 +65,46 @@ public class JoinAlgorithm
         for(int i = 0; i < outerTable.size(); i += ((numberOfBuffers-2)*BFR))
         {
             //so we don't go out of bounds:
-            int lastRecordIndex = Math.min(outerTable.size(), i + ((numberOfBuffers-2)*BFR));
+            int lastRecordIndexChunk = Math.min(outerTable.size(), i + ((numberOfBuffers-2)*BFR));
 
             ArrayList<Map<String, String>> Chunk = new ArrayList<>();
 
-            for(int j = i; j < lastRecordIndex; j++)
+            for(int j = i; j < lastRecordIndexChunk; j++)
                 Chunk.add(outerTable.get(j));
 
             for(Map<String, String> record1 : Chunk)
             {
-                for(Map<String, String> record2 : innerTable)
+                //accessing the larger table block at a time
+                for(int k = 0; k < innerTable.size(); k+=BFR)
                 {
-                    //left has the outerTable join column, right has the innerTable join columnm
-                    String val1 = record1.get(left);
-                    String val2 = record2.get(right);
+                    //so we don't go out of bounds:
+                    int lastRecordIndexBlock = Math.min(innerTable.size(), k+BFR);
 
-                    if(val1 != null && val2 != null)
+                    ArrayList<Map<String, String>> block = new ArrayList<>();
+
+                    for(int u = k; u < lastRecordIndexBlock; u++)
+                        block.add(innerTable.get(u));
+
+                    for(Map<String, String> record2 : block)
                     {
-                        if(val1.equals(val2))
+                        //left has the outerTable join column, right has the innerTable join columnm
+                        String val1 = record1.get(left);
+                        String val2 = record2.get(right);
+
+                        if(val1 != null && val2 != null)
                         {
-                            Map<String, String> joinedRow =new LinkedHashMap<>();
-                            joinedRow.putAll(record1);
-                            joinedRow.putAll(record2);
-                            result.add(joinedRow);
+                            if(val1.equals(val2))
+                            {
+                                Map<String, String> joinedRow =new LinkedHashMap<>();
+                                joinedRow.putAll(record1);
+                                joinedRow.putAll(record2);
+                                result.add(joinedRow);
+                            }
                         }
                     }
                 }
+
+
             }
         }
         return result;
