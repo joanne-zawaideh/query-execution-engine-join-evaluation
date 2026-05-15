@@ -23,7 +23,7 @@ public class ExecutionEngine
     private static long hashJoinTime;
     private static long nestedProjectTime;
     private static long hashProjectTime;
-    private static long nestedLoopTotalTime;
+    private static long nestedTotalTime;
     private static long hashTotalTime;
 
     private static int scanBlock;
@@ -35,6 +35,8 @@ public class ExecutionEngine
     private static int hashProjectBlock;
     private static int nestedLoopJoinBlock;
     private static int hashJoinBlock;
+    private static int nestedTotalBlock;
+    private static int hashTotalBlock;
 
 
     public static void ExecuteMe(String joinAlgorithm)
@@ -280,6 +282,7 @@ public class ExecutionEngine
         projectBlock = 0;
         hashJoinBlock = 0;
         nestedLoopJoinBlock = 0;
+        nestedProjectBlock = 0;
 
         //read the query
         String query = "";
@@ -292,6 +295,7 @@ public class ExecutionEngine
         {
             ex.printStackTrace();
         }
+
         //Start execution
         Query q = new Query(query);
         try 
@@ -319,8 +323,9 @@ public class ExecutionEngine
 
 
             //Execute where condition(s)
-            ArrayList<Map<String, String>> whereResult, nestedJoinResult, hashWhereResult = null;
-            long startOfFilter, startOfNestedLoopJoin, startOfHashJoin;
+            ArrayList<Map<String, String>> whereResult = null, nestedJoinResult = null, hashJoinResult = null;
+            ArrayList<Map<String, String>>nestedFinalResult = null, hashFinalResult = null;
+            long startOfHashJoin;
 
             //if join exists (there are two tables)
             if (q.getJoin() != null) 
@@ -328,7 +333,7 @@ public class ExecutionEngine
                 //if filter condition exists
                 if (q.getFilter() != null) 
                 {
-                    startOfFilter = System.currentTimeMillis();
+                    long startOfFilter = System.currentTimeMillis();
                     String filterCol = q.getFilter()[0];
                     if (firstTable.get(0).containsKey(filterCol)) 
                     {
@@ -364,23 +369,37 @@ public class ExecutionEngine
                     nestedLoopJoinBlock += Math.ceil((float) secondTable.size() / bfr)
                             + (Math.ceil((float) Math.ceil((float) secondTable.size() / bfr) / (numberOfBuffers - 2)) * Math.ceil((float) firstTable.size() / bfr));
                 }
-                startOfNestedLoopJoin = System.currentTimeMillis();
+
+                long startOfNestedLoopJoin = System.currentTimeMillis();
                 nestedJoinResult = JoinAlgorithm.MeNestedLoop(firstTable, secondTable, q.getJoin());
                 nestedLoopJoinTime = System.currentTimeMillis() - startOfNestedLoopJoin;
 
                 long startOfNestedProject = System.currentTimeMillis();
-                ArrayList<Map<String, String>> nestedFinalResult = ProjectOperator.ProjectMe(nestedJoinResult, q.getSelectCols());
+                nestedFinalResult = ProjectOperator.ProjectMe(nestedJoinResult, q.getSelectCols());
                 nestedProjectTime = System.currentTimeMillis() - startOfNestedProject;
-                //I STOPPED HERE
-                nestedProjectBlock = (int) Math.ceil((float)nestedFinalResult.size() / bfr);
-                
+                nestedProjectBlock += Math.ceil((float) nestedFinalResult.size() / bfr);
+
+                //total nested block accesses and time
+                nestedTotalTime = scanTime + filterTime + nestedLoopJoinTime + nestedProjectTime;
+                nestedTotalBlock = scanBlock + filterBlock + nestedLoopJoinBlock + nestedProjectBlock;
+
+
                 //hash join
                 hashJoinBlock += Math.ceil((float) firstTable.size() / bfr) + Math.ceil((float) secondTable.size() / bfr);
                 blockAccesses += Math.ceil((float) firstTable.size() / bfr) + Math.ceil((float) secondTable.size() / bfr);
                 startOfHashJoin = System.currentTimeMillis();
-                hashWhereResult = JoinAlgorithm.MeHashJoin(firstTable, secondTable, q.getJoin());
+                hashJoinResult = JoinAlgorithm.MeHashJoin(firstTable, secondTable, q.getJoin());
                 hashJoinTime = System.currentTimeMillis() - startOfHashJoin;
-                
+
+                long startOfHashProject = System.currentTimeMillis();
+                hashFinalResult = ProjectOperator.ProjectMe(hashJoinResult, q.getSelectCols());
+                hashProjectTime = System.currentTimeMillis() - startOfHashProject;
+                hashProjectBlock += Math.ceil((float) hashFinalResult.size() / bfr);
+
+                //total hash block accesses and time
+                hashTotalTime = scanTime + filterTime + hashJoinTime + hashProjectTime;
+                hashTotalBlock = scanBlock + filterBlock + hashJoinBlock + hashProjectBlock;
+
             }
 
             //if join doesn't exist and filter exist (only firstTable exist)
