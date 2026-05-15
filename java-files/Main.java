@@ -8,9 +8,7 @@ public class Main
 {
     public static void main(String[] args)
     {
-        ExecutionEngine.ExecuteMe("Nested Loop");
-
-        //ExecutionEngine.ExecuteMe("Hash");
+        ExecutionEngine.ExecuteMe();
     }
 }
 
