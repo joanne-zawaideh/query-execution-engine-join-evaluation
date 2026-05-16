@@ -67,7 +67,7 @@ public class ExecutionEngine
             if(q.getTables().length > 1)
             {
                 secondTable = ScanOperator.ScanMe(q.getTables()[1]);
-                scanBlock = (int) Math.ceil((float)secondTable.size() / bfr);
+                scanBlock += (int) Math.ceil((float)secondTable.size() / bfr);
             }
             scanTime = System.currentTimeMillis() - startOfScan;
 
