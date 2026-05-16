@@ -19,10 +19,11 @@ public class Query
     public String[] getJoin() { return join; }
     public String[] getSelectCols() { return selectCols; }
     public String[] getTables() { return tables; }
+
     public void ParseMe() throws Exception
     {
         //store query
-        query = query.replace("\n", " ").replace("\r", " ").trim();
+        query = query.replace("\n", " ").replace("\r", " ").trim(); //line endings in Windows = \r\n
         String upperQuery = query.toUpperCase().trim();
 
         //check select and from
@@ -54,7 +55,6 @@ public class Query
         query = query.substring(0, query.length() - 1);
 
 
-
         //split the query into parts
         //check cols exist
         if(query.substring(selectIndex + 6, fromIndex).trim().isEmpty())
@@ -65,6 +65,7 @@ public class Query
         if(query.substring(selectIndex + 6, fromIndex).trim().equals("*"))
         {
             selectCols = new String[]{"*"};
+            //note: selectCols is reassigned in ProjectMe() with the proper col values
         }
         else
         {
@@ -74,7 +75,7 @@ public class Query
             }
         }
 
-        //check tables exist
+        //check if tables in FROM exist
         if(whereIndex != -1)
         {
             if(query.substring(fromIndex + 4, whereIndex).trim().isEmpty())

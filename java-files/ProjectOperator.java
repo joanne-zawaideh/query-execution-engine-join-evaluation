@@ -14,7 +14,7 @@ public class ProjectOperator
             //must use toArray() to access length property
             selectCols = new String[temp.keySet().toArray().length];
             for(int i = 0; i < selectCols.length; i++)
-                selectCols[i] = temp.keySet().toArray()[i].toString();//must use toArray() to use [i], also toString() as keySet returns references
+                selectCols[i] = temp.keySet().toArray()[i].toString(); //must use toArray() to use [i], also toString() as keySet returns references
         }
 
         else

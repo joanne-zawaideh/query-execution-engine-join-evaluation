@@ -15,7 +15,7 @@ public class SelectOperator
         Map<String, String> temp = table.get(0);
 
         if(!temp.containsKey(col))
-            throw new Exception("ERROR: Filter on Invalid Column");
+            throw new Exception("Filter on Invalid Column");
 
 
         boolean isNumeric;
@@ -30,7 +30,7 @@ public class SelectOperator
         catch(NumberFormatException e)
         {
             isNumeric = false;
-            //remove single quotes
+            //remove single quotes, the value is a string
             value = value.substring(1, value.length() - 1);
         }
 

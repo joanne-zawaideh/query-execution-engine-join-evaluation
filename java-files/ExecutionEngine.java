@@ -161,7 +161,6 @@ public class ExecutionEngine
                 nestedFinalResult = ProjectOperator.ProjectMe(nestedResult,q.getSelectCols());
                 projectTime = System.currentTimeMillis() - startOfProject;
 
-
                 hashFinalResult = ProjectOperator.ProjectMe(hashResult,q.getSelectCols());
             }
             else
@@ -197,16 +196,6 @@ public class ExecutionEngine
                 writeFile("input-files\\nestedLoopResult.txt", whereFinalResult);
                 writeFile("input-files\\hashResult.txt", whereFinalResult);
             }
-
-//            //TESTING PURPOSES
-//            for (Map<String, String> row : finalResult) {
-//
-//                for (Map.Entry<String, String> entry : row.entrySet()) {
-//                    System.out.print(entry.getKey() + ": " + entry.getValue() + " | ");
-//                }
-//                System.out.println();
-//            }
-//            System.out.println(finalResult.size());
         }
         catch (Exception e)
         {
@@ -237,6 +226,8 @@ public class ExecutionEngine
                     + "4) Project Block Accesses = " + projectBlock + "\n"
                     + "- Number of records returned = " + finalResult.size() + "\n\n";
             bw.write(details);
+
+
             //write result table
             bw.write("Result Table:");
             bw.newLine();
@@ -249,7 +240,7 @@ public class ExecutionEngine
                 bw.write(key);
                 lineLength += key.length();
                 //each column will be 30 characters long
-                int numOfSpaces = 30 - key.length();
+                int numOfSpaces = 40 - key.length();
                 if(numOfSpaces > 0)
                 {
                     bw.write(" ".repeat(numOfSpaces));
@@ -266,7 +257,7 @@ public class ExecutionEngine
                 for(String value: record.values())
                 {
                     bw.write(value);
-                    int numOfSpaces = 30 - value.length();
+                    int numOfSpaces = 40 - value.length();
                     if(numOfSpaces > 0)
                     {
                         bw.write(" ".repeat(numOfSpaces));

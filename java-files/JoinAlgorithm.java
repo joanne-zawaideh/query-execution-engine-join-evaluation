@@ -15,9 +15,9 @@ public class JoinAlgorithm
         int numberOfBuffers=7;
         int BFR = 100;
 
-        //initial values before checking
-        String left = join[0];
-        String right = join[2];
+        String col1 = join[0];
+        String col2 = join[2];
+        String left, right;
 
         ArrayList<Map<String, String>> result = new ArrayList<>();
 
@@ -29,36 +29,32 @@ public class JoinAlgorithm
         {
             outerTable = table1;
             innerTable = table2;
-
-            String leftTable = join[0].split("\\.")[0].trim();
-            if(!leftTable.equals("Customers"))
-            {
-                left = join[2];
-                right = join[0];
-            }
         }
         else
         {
             outerTable = table2;
             innerTable = table1;
-
-            String leftTable = join[0].split("\\.")[0].trim();
-            if(!leftTable.equals("Orders"))
-            {
-                left = join[2];
-                right = join[0];
-            }
         }
 
-        //check col validity
-        Map<String, String> temp1 = outerTable.get(0);
-        Map<String, String> temp2 = innerTable.get(0);
-        boolean validCols = true;
+        Map<String, String> outerTemp = outerTable.get(0);
+        Map<String, String> innerTemp = innerTable.get(0);
 
-        if(!temp1.containsKey(left)) validCols = false;
-        if(!temp2.containsKey(right)) validCols = false;
-        if(!validCols)
-            throw new Exception("ERROR: Join on Invalid Columns.");
+        if(outerTemp.containsKey(col1) && innerTemp.containsKey(col2))
+        {
+           left = col1;
+           right = col2;
+        }
+        else if(outerTemp.containsKey(col2) && innerTemp.containsKey(col1))
+        {
+            left = col2;
+            right = col1;
+        }
+        else
+        {
+            //invalid cols (not in any of the tables)
+            System.out.println("nested");
+            throw new Exception("Join on Invalid Columns.");
+        }
 
 
         //outer loop accessing the smaller table nB-2 blocks at a time (every ((numberOfBuffers-2)*BFR) records)
@@ -74,7 +70,7 @@ public class JoinAlgorithm
 
             for(Map<String, String> record1 : Chunk)
             {
-                //accessing the larger table block at a time
+                //accessing the larger table one block at a time
                 for(int k = 0; k < innerTable.size(); k+=BFR)
                 {
                     //so we don't go out of bounds:
@@ -112,9 +108,9 @@ public class JoinAlgorithm
 
     public static ArrayList<Map<String, String>> MeHashJoin(ArrayList<Map<String, String>> table1, ArrayList<Map<String, String>> table2, String[] join) throws Exception
     {
-        //initial values before checking
-        String left = join[0];
-        String right = join[2];
+        String col1 = join[0];
+        String col2 = join[2];
+        String left, right;
 
         ArrayList<Map<String, String>> result = new ArrayList<>();
 
@@ -126,38 +122,33 @@ public class JoinAlgorithm
         {
             smallerTable = table1;
             largerTable = table2;
-
-            String leftTable = join[0].split("\\.")[0].trim();
-            if(!leftTable.equals("Customers"))
-            {
-                left = join[2];
-                right = join[0];
-            }
         }
         else
         {
             smallerTable = table2;
             largerTable = table1;
-
-            String leftTable = join[0].split("\\.")[0].trim();
-            if(!leftTable.equals("Orders"))
-            {
-                left = join[2];
-                right = join[0];
-            }
         }
 
+        Map<String, String> smallerTemp = smallerTable.get(0);
+        Map<String, String> largerTemp = largerTable.get(0);
+        if(smallerTemp.containsKey(col1) && largerTemp.containsKey(col2))
+        {
+            left = col1;
+            right = col2;
+        }
+        else if(smallerTemp.containsKey(col2) && largerTemp.containsKey(col1))
+        {
+            left = col2;
+            right = col1;
+        }
+        else
+        {
+            //invalid cols (not in any of the tables)
+            System.out.println("hash");
+            throw new Exception("Join on Invalid Columns.");
+        }
 
-        //check col validity
-        Map<String, String> temp1 = smallerTable.get(0);
-        Map<String, String> temp2 = largerTable.get(0);
-        boolean validCols = true;
-        if(!temp1.containsKey(left)) validCols = false;
-        if(!temp2.containsKey(right)) validCols = false;
-        if(!validCols)
-            throw new Exception("ERROR: Join on Invalid Columns.");
-
-        //now left has smallerTable join column and right has largerTable
+        //now left has smallerTable join column and right has largerTable join column
 
         //map each record to a numbered bucket
         HashMap<Integer, ArrayList<Map<String, String>>> hashTable = new HashMap<>();
