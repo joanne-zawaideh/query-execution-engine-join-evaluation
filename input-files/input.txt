@@ -1,5 +1,4 @@
-SELECT Orders.order_id, Customers.customer_id
-FROM Customers, Orders
-WHERE Customers.customer_id = Orders.customer_id
-AND Orders.amount < 5000;
+SELECT Orders.order_id
+FROM Orders
+WHERE Orders.amount < 5000;
 

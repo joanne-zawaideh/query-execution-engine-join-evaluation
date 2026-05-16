@@ -151,6 +151,9 @@ public class ExecutionEngine
 
             ArrayList<Map<String, String>> nestedFinalResult = null;
             ArrayList<Map<String, String>> hashFinalResult = null;
+            // if join doesn't exist
+            ArrayList<Map<String, String>> whereFinalResult = null;
+
             if(joinExist)
             {
                 projectBlock = (int) Math.ceil((float)nestedResult.size() / bfr);
@@ -165,7 +168,7 @@ public class ExecutionEngine
             {
                 projectBlock = (int) Math.ceil((float)whereResult.size() / bfr);
                 long startOfProject = System.currentTimeMillis();
-                ArrayList<Map<String, String>> finalResult = ProjectOperator.ProjectMe(whereResult,q.getSelectCols());
+                whereFinalResult = ProjectOperator.ProjectMe(whereResult,q.getSelectCols());
                 projectTime = System.currentTimeMillis() - startOfProject;
             }
 
@@ -191,8 +194,8 @@ public class ExecutionEngine
                 totalBlock = scanBlock + filterBlock + projectBlock;
                 joinTime = 0;
                 joinBlock = 0;
-                writeFile("input-files\\nestedLoopResult.txt", whereResult);
-                writeFile("input-files\\hashResult.txt", whereResult);
+                writeFile("input-files\\nestedLoopResult.txt", whereFinalResult);
+                writeFile("input-files\\hashResult.txt", whereFinalResult);
             }
 
 //            //TESTING PURPOSES
