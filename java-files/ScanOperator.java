@@ -15,7 +15,10 @@ public class ScanOperator
         tableName = tableName.trim();
         try
         {
-            FileReader fr = new FileReader("input-files\\" + tableName + "_20000.csv");
+            FileReader fr = new FileReader("input-files\\" + tableName + "_10000.csv");
+            //FileReader fr = new FileReader("input-files\\" + tableName + "_20000.csv");
+            //FileReader fr = new FileReader("input-files\\" + tableName + "_30000.csv");
+
             BufferedReader br = new BufferedReader(fr);
 
             String[] headers = br.readLine().split(",");

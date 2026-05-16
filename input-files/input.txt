@@ -1,4 +1,4 @@
-SELECT Orders.order_id
-FROM Orders
-WHERE Orders.amount < 5000;
+SELECT *
+FROM Customers
+WHERE Customers.points < 2000;
 

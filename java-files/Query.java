@@ -62,11 +62,18 @@ public class Query
             throw new Exception("No columns in SELECT");
         }
         //assign select columns
-        selectCols = query.substring(selectIndex + 6, fromIndex).trim().split(",");
-        for(int i = 0; i < selectCols.length; i++)
+        if(query.substring(selectIndex + 6, fromIndex).trim().equals("*"))
         {
-            selectCols[i] = selectCols[i].trim();
+            selectCols = new String[]{"*"};
         }
+        else
+        {
+            selectCols = query.substring(selectIndex + 6, fromIndex).trim().split(",");
+            for (int i = 0; i < selectCols.length; i++) {
+                selectCols[i] = selectCols[i].trim();
+            }
+        }
+
         //check tables exist
         if(whereIndex != -1)
         {
